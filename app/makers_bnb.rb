@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
+require_relative 'data_mapper_setup.rb'
 
 class MakersBnb < Sinatra::Base
   get '/' do
@@ -8,11 +9,17 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/spaces' do
+    @spaces = Space.all
     erb :'spaces/index'
   end
 
   get '/spaces/new' do
     erb :'spaces/new'
+  end
+
+  post '/spaces/new' do
+    Space.create(name: params[:name])
+    redirect to '/spaces'
   end
 
 
