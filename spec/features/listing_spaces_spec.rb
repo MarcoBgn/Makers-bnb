@@ -44,4 +44,14 @@ feature 'listing spaces' do
     click_button 'List my Space'
     expect(page).to have_content('It is yellow')
   end
+  # As a user,
+  # so I can correctly advertise my spaces,
+  # I would like to be able to list the price my space costs per night
+  scenario 'I can add a price for my space' do
+    visit('/spaces/new')
+    fill_in('price', :with => '5')
+    click_button 'List my Space'
+    expect(page).to have_content('£5 per night')
+  end
+
 end
