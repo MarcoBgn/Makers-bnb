@@ -10,7 +10,9 @@ require 'rspec'
 require 'data_mapper'
 require 'database_cleaner'
 require 'web_helper'
+require 'coveralls'
 
+Coveralls.wear!
 Capybara.app = MakersBnb
 
 RSpec.configure do |config|
