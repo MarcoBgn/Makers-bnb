@@ -1,3 +1,9 @@
 <form action='/spaces/new'>
   <button type='submit'>List a Space</button>
 </form>
+
+<ul>
+<% @spaces.each do |space| %>
+  <li><%= space.name%></li>
+  <% end %>
+</ul>
