@@ -4,6 +4,9 @@
 
 <ul>
 <% @spaces.each do |space| %>
-  <li><%= space.name%></li>
+  <li>
+    <%= space.name%>
+    <%= space.description%>
+  </li>
   <% end %>
 </ul>

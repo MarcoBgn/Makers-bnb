@@ -34,4 +34,14 @@ feature 'listing spaces' do
     expect(page).to have_content('A beautiful relaxing space')
     expect(page).to have_content('A horrible stressful space')
   end
+
+  # As a user,
+  # so the subject of my spaces is clear,
+  # I would like to be able to add a description of my space
+  scenario 'I can add description of my space' do
+    visit('/spaces/new')
+    fill_in('description', :with => 'It is yellow')
+    click_button 'List my Space'
+    expect(page).to have_content('It is yellow')
+  end
 end
