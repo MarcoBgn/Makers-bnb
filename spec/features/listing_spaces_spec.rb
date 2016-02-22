@@ -44,6 +44,7 @@ feature 'listing spaces' do
     click_button 'List my Space'
     expect(page).to have_content('It is yellow')
   end
+
   # As a user,
   # so I can correctly advertise my spaces,
   # I would like to be able to list the price my space costs per night
@@ -54,4 +55,15 @@ feature 'listing spaces' do
     expect(page).to have_content('£5 per night')
   end
 
+  # As a User,
+  # so that I can list the space when I want,
+  # I would like to be able to add available dates to the listing
+  scenario 'I can add available dates to the listing' do
+    visit('/spaces/new')
+    fill_in('available_from', :with => '2016-01-01')
+    fill_in('available_to', :with => '2016-08-01')
+    click_button 'List my Space'
+    expect(page).to have_content('2016-01-01')
+    expect(page).to have_content('2016-08-01')
+  end
 end
