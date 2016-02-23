@@ -1,16 +1,20 @@
-<form action='/spaces/new' method='post'>
-  <label for='name'>
-    Name:
-    <input type='text' name='name'>
-  </label>
-  <label for='description'>
-    Description:
-    <input type='text' name='description'>
-  </label>
-  <label for='price'>
-    Price per night: £
-    <input type='text' name='price'>
-  </label>
-  
-  <button type='submit'>List my Space</button>
-</form>
+<section id='main'>
+   <form action='/spaces/new' method='post'>
+     <fieldset>
+       <label for='name'>
+       <p class='in_main'>  Name:
+         <input type='text' name='name' required> </p></br>
+       </label>
+       <label for='description'>
+        <p class='in_main'> Description:
+         <textarea name='description'></textarea></p></br>
+       </label>
+       <label for='price'>
+         <p class='in_main'> Price per night: £
+         <input type='text' name='price' required> </p></br>
+       </label>
+      
+       <button type='submit'>List my Space</button>
+     </fieldset>
+   </form>
+</section>
