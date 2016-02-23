@@ -69,7 +69,6 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/spaces' do
-    p "I am in get spaces"
     if session[:space_array]
       @spaces = session[:space_array].map do |space_id|
         Space.get(space_id)
@@ -81,17 +80,17 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces' do
-    p "I am in post spaces"
     date_from = Date.parse(params[:available_from])
     date_to = Date.parse(params[:available_to])
-    available_dates = (date_from..date_to).map do |date|
-      AvailableDate.all(available_date: date)
-    end
-    available_dates.reject!(&:empty?)
+    available_dates = []
+    (date_from..date_to).each do |date|
+      AvailableDate.all(available_date: date).each do |x|
+        available_dates << x
+        end
+      end
     if available_dates && !available_dates.empty?
-      p "available dates: #{available_dates}"
       available_spaces = available_dates.map do |date|
-        date.first.space_id
+        date.space_id
       end
       session[:space_array] = available_spaces.uniq
     else
