@@ -1,10 +1,11 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative 'data_mapper_setup.rb'
 require 'sinatra/flash'
 require 'sinatra/partial'
-
+require 'date'
 
 
 class MakersBnb < Sinatra::Base
@@ -68,8 +69,43 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/spaces' do
-    @spaces = Space.all
+    p "I am in get spaces"
+    if session[:space_array]
+      @spaces = session[:space_array].map do |space_id|
+        Space.get(space_id)
+      end
+    else
+      @spaces = Space.all
+    end
     erb :'spaces/index'
+  end
+
+  post '/spaces' do
+    p "I am in post spaces"
+    date_from = Date.parse(params[:available_from])
+    date_to = Date.parse(params[:available_to])
+    available_dates = (date_from..date_to).map do |date|
+      AvailableDate.all(available_date: date)
+    end
+    available_dates.reject!(&:empty?)
+    if available_dates && !available_dates.empty?
+      p "available dates: #{available_dates}"
+      available_spaces = available_dates.map do |date|
+        date.first.space_id
+      end
+      session[:space_array] = available_spaces.uniq
+    else
+      flash[:notice] = 'No spaces available for requested dates'
+    end
+
+    redirect to '/spaces'
+  end
+
+
+  post '/reset_search' do
+    p "I am resetting the search"
+    session[:space_array] = nil
+    redirect to '/spaces'
   end
 
   get '/spaces/new' do
@@ -77,8 +113,18 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces/new' do
-    Space.create(name: params[:name], description: params[:description], price: params[:price])
-    redirect to '/spaces'
+    @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to])
+    if @space.save
+      date_from = @space.available_from
+      date_to = @space.available_to
+      (date_from..date_to).each do |date|
+        AvailableDate.create(available_date: date, space_id: @space.id)
+      end
+      redirect to '/spaces'
+    else
+      flash[:notice] = 'Please complete the required fields'
+      redirect to '/spaces/new'
+    end
   end
 
   helpers do

@@ -1,6 +1,30 @@
 
+<% if flash[:notice]%>
+  <div id='flash-error'>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+
 <form action='/spaces/new'>
   <button type='submit'>List a Space</button>
+</form>
+
+<form action='/spaces' method='post'>
+  <label for='available_from'>
+    Available from (DD/MM/YY)
+    <input type='text' name='available_from'>
+  </label>
+  <label for='available_to'>
+    Available to (DD/MM/YY)
+    <input type='text' name='available_to'>
+  </label>
+  <button type='submit'>List Spaces</button>
+</form>
+
+<form action='/reset_search' method='post'>
+<!--   <input type='hidden' name='_method' value='delete'>
+ -->  <button type='submit'>Reset Search</button>
 </form>
 
 <section id='spaces'>
@@ -16,5 +40,5 @@
       </section></a>
     </li>
     <% end %>
-</ul>
-<section>
+
+

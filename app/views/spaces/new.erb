@@ -1,20 +1,35 @@
+
+<% if flash[:notice]%>
+  <div id='flash-error'>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <section id='main'>
-   <form action='/spaces/new' method='post'>
+  <form action='/spaces/new' method='post'>
      <fieldset>
-       <label for='name'>
-       <p class='in_main'>  Name:
-         <input type='text' name='name' required> </p></br>
-       </label>
-       <label for='description'>
-        <p class='in_main'> Description:
-         <textarea name='description'></textarea></p></br>
-       </label>
-       <label for='price'>
-         <p class='in_main'> Price per night: £
-         <input type='text' name='price' required> </p></br>
-       </label>
-      
-       <button type='submit'>List my Space</button>
+    <label for='name'>
+      <p class='in_main'>  Name:
+        <input type='text' name='name' required> </p></br>
+    </label>
+    <label for='description'>
+      <p class='in_main'> Description:
+       <textarea name='description'></textarea></p></br>
+    </label>
+    <label for='price'>
+     <p class='in_main'> Price per night: £
+     <input type='text' name='price' required> </p></br>
+    </label>
+    <label for='available_from'>
+      Available from (DD/MM/YY)
+      <input type='text' name='available_from'>
+    </label>
+    <label for='available_to'>
+      Available to (DD/MM/YY)
+      <input type='text' name='available_to'>
+    </label>
+  
+    <button type='submit'>List my Space</button>
      </fieldset>
-   </form>
+  </form>
 </section>
+

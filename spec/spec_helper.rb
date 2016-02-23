@@ -10,9 +10,13 @@ require 'rspec'
 require 'data_mapper'
 require 'database_cleaner'
 require 'web_helper'
+require_relative 'helpers/space'
 require 'coveralls'
 
+
 Coveralls.wear!
+
+
 Capybara.app = MakersBnb
 
 RSpec.configure do |config|
@@ -40,5 +44,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.include SpaceHelpers
 
 end
