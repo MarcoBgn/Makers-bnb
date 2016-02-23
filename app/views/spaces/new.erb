@@ -1,3 +1,8 @@
+<% if flash[:notice]%>
+  <div id='flash-error'>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <form action='/spaces/new' method='post'>
   <label for='name'>
     Name:

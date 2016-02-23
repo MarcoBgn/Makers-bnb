@@ -53,4 +53,23 @@ feature 'listing spaces' do
     expect(page).to have_content('2016-01-01')
     expect(page).to have_content('2016-08-01')
   end
+
+  scenario "the name field cannot be left empty"do
+    expect{list_space(name: nil)}.not_to change(Space, :count)
+    expect(page).to have_content('Please complete the required fields')
+  end
+
+  scenario "the price field cannot be left empty"do
+    expect{list_space(price: nil)}.not_to change(Space, :count)
+    expect(page).to have_content('Please complete the required fields')
+  end
+
+  scenario "the available_from field cannot be left empty"do
+    expect{list_space(available_from: nil)}.not_to change(Space, :count)
+    expect(page).to have_content('Please complete the required fields')
+  end
+  scenario "the available_to field cannot be left empty"do
+    expect{list_space(available_to: nil)}.not_to change(Space, :count)
+    expect(page).to have_content('Please complete the required fields')
+  end
 end

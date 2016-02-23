@@ -1,9 +1,13 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative 'data_mapper_setup.rb'
 
 class MakersBnb < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
+
   get '/' do
     'Hello MakersBnb!'
   end
@@ -14,12 +18,18 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/spaces/new' do
+    p "flash notice (after redirect) is #{flash[:notice]}"
     erb :'spaces/new'
   end
 
   post '/spaces/new' do
-    Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to])
-    redirect to '/spaces'
+    @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to])
+    if @space.save
+      redirect to '/spaces'
+    else
+      flash[:notice] = 'Please complete the required fields'
+      redirect to '/spaces/new'
+    end
   end
 
 
