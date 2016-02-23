@@ -16,12 +16,14 @@ class MakersBnb < Sinatra::Base
   enable :sessions
 
   set :partial_template_engine, :erb
+  set method_override: true
 
   get '/' do
     redirect '/users/new'
   end
 
   get '/users/new' do
+    @user = User.new
     erb :'users/new'
   end
 
@@ -42,6 +44,27 @@ class MakersBnb < Sinatra::Base
 
   get '/users/account' do
     erb :'users/account'
+  end
+
+  get '/sessions/new' do
+    erb :'sessions/new'
+  end
+
+  post '/sessions' do
+    user = User.authenticate(params[:email], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect '/'
+    else
+      flash.now[:errors] = ['The email or password is incorrect']
+      erb :'sessions/new'
+    end
+  end
+
+  delete '/sessions' do
+    flash[:notice] = "See you later, #{current_user.name}"
+    session[:user_id] = nil
+    redirect '/'
   end
 
   get '/spaces' do

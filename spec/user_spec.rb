@@ -19,4 +19,13 @@ describe User do
     expect(user.username).to eq "User123"
   end
 
+  it 'authenticates when details are correct' do
+    authenticated_user = User.authenticate(user.email, user.password)
+    expect(authenticated_user).to eq user
+  end
+
+  it "doesn't authenticate when details are incorrect" do
+    rejected_user = User.authenticate(user.email, 'wrong')
+    expect(rejected_user).to eq nil
+  end
 end
