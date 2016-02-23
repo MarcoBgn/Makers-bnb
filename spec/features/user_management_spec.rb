@@ -8,40 +8,46 @@ feature 'User Management Feature:' do
     expect(page).to have_content 'Password does not match the confirmation'
   end
 
-  scenario "Can't sign up when email is already in use" do
-    sign_up
-    expect{sign_up}.not_to change(User, :count)
-    expect(page).to have_content 'Email is already taken'
+  context 'when an account is created' do
+    before do
+      sign_up
+    end
+
+    scenario "Can't sign up when email is already in use" do
+      expect{sign_up}.not_to change(User, :count)
+      expect(page).to have_content 'Email is already taken'
+    end
+
+    scenario "Can't sign up when username is already in use" do
+      expect{sign_up(email: 'testing2@doubletests.com')}.not_to change(User, :count)
+      expect(page).to have_content 'Username is already taken'
+    end
+
+    scenario "User is greeted after signing up" do
+      expect(page).to have_content 'Welcome, John Smith'
+    end
+
+    context 'and the user is signed out' do
+      before do
+        click_button "Sign Out"
+      end
+
+      scenario "User can sign in with correct details" do
+        sign_in
+        expect(page).to have_content "Welcome, John Smith"
+      end
+
+      scenario "User can't sign in with incorrect details" do
+        sign_in(password: 'wrong password')
+        expect(page).to have_content 'The email or password is incorrect'
+      end
+    end
+
+    scenario "User can sign out" do
+      click_button "Sign Out"
+      expect(page).not_to have_content "Welcome, John Smith"
+      expect(page).to have_content "See you later, John Smith"
+    end
   end
 
-  scenario "Can't sign up when username is already in use" do
-    sign_up
-    expect{sign_up(email: 'testing2@doubletests.com')}.not_to change(User, :count)
-    expect(page).to have_content 'Username is already taken'
-  end
-
-  scenario "User is greeted after signing up" do
-    sign_up
-    expect(page).to have_content 'Welcome, John Smith'
-  end
-  
-  scenario "User can sign in" do
-    sign_up
-    click_button "Sign Out"
-    click_button "Login"
-    fill_in :email, with: 'test@ymail.com'
-    fill_in :password, with: 's£cr3t'
-    click_button 'Login'
-    expect(page).to have_content "Welcome, John Smith"
-  end
-  
-  
-  scenario "User can sign out" do
-    sign_up
-    click_button "Sign Out"
-    expect(page).not_to have_content "Welcome, John Smith"
-    expect(page).to have_content "See you later, John Smith"
-  end
-  
-  
 end

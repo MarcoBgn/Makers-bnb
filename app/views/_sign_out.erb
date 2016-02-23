@@ -4,14 +4,11 @@
     <input class='sign_out_button' type='submit' value='Sign Out'>
   </form>
   <% else %>
-  
-  <form action='sessions/new' method='post'>
-    <input >
+  <form action='/sessions/new' method='get'>
+    <input class='sign_in_button' type='submit' value='Login'>
   </form>
-  
 <% end %>
 
 <% if flash[:notice] %>
   <div><%= flash[:notice] %></div>
 <% end %>
-  
