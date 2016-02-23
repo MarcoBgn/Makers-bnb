@@ -8,6 +8,10 @@ feature 'User Management Feature:' do
     expect(page).to have_content 'Password does not match the confirmation'
   end
 
+  scenario "Can't sign up with an incorrect email format" do
+    expect{sign_up(email: 'testing.com')}.not_to change(User, :count)
+  end
+
   context 'when an account is created' do
     before do
       sign_up

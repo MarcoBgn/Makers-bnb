@@ -1,4 +1,5 @@
 require 'data_mapper'
+require 'dm-validations'
 require 'bcrypt'
 
 class User
@@ -24,5 +25,8 @@ class User
   attr_accessor :password_confirmation
 
   validates_confirmation_of :password
+
+  validates_length_of :email, :min => 5
+  validates_format_of :email, :as => :email_address
 
 end
