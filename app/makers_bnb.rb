@@ -16,6 +16,7 @@ class MakersBnb < Sinatra::Base
   enable :sessions
 
   set :partial_template_engine, :erb
+  set method_override: true
 
   get '/' do
     redirect '/users/new'
@@ -42,6 +43,12 @@ class MakersBnb < Sinatra::Base
 
   get '/users/account' do
     erb :'users/account'
+  end
+  
+  delete '/sessions' do
+    flash[:notice] = "See you later, #{current_user.name}"
+    session[:user_id] = nil
+    redirect '/'
   end
 
   get '/spaces' do

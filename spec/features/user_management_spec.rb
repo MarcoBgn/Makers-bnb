@@ -24,4 +24,24 @@ feature 'User Management Feature:' do
     sign_up
     expect(page).to have_content 'Welcome, John Smith'
   end
+  
+  scenario "User can sign in" do
+    sign_up
+    click_button "Sign Out"
+    click_button "Login"
+    fill_in :email, with: 'test@ymail.com'
+    fill_in :password, with: 's£cr3t'
+    click_button 'Login'
+    expect(page).to have_content "Welcome, John Smith"
+  end
+  
+  
+  scenario "User can sign out" do
+    sign_up
+    click_button "Sign Out"
+    expect(page).not_to have_content "Welcome, John Smith"
+    expect(page).to have_content "See you later, John Smith"
+  end
+  
+  
 end

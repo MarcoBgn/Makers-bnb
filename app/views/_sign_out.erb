@@ -1,0 +1,17 @@
+<% if current_user %>
+  <form action='/sessions' method='post'>
+    <input type='hidden' name='_method' value='delete'>
+    <input class='sign_out_button' type='submit' value='Sign Out'>
+  </form>
+  <% else %>
+  
+  <form action='sessions/new' method='post'>
+    <input >
+  </form>
+  
+<% end %>
+
+<% if flash[:notice] %>
+  <div><%= flash[:notice] %></div>
+<% end %>
+  

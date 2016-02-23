@@ -1,8 +1,14 @@
-<form class='sign_up' action='/users/new' method='post'>
-  Email:    <input type='email' name='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required >
-  Password: <input type='password' name='password' required >
-  Password Confirmation: <input type='password' name='password_confirmation' required >
-  Name: <input type='text' name='name' required >
-  User Name: <input type='text' name='username' required >
-  <input type='submit' value='Sign Up'>
-</form>
+
+<h1>Feel at Home, Anywhere</h1>
+<section id='main'>
+  <form id='sign_up' action='/users/new' method='post'>
+    <fieldset>
+     <p class='in_main'> Email:    <input type='email' name='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required ></p></br>
+     <p class='in_main'> Password: <input type='password' name='password' required ></p></br>
+     <p class='in_main'> Password Confirmation: <input type='password' name='password_confirmation' required ></p></br>
+     <p class='in_main'> Name: <input type='text' name='name' required ></p></br>
+     <p class='in_main'> User Name: <input type='text' name='username' required ></p></br>
+      <input class='in_main' type='submit' value='Sign Up'>
+    </fieldset>
+  </form>
+</section>
