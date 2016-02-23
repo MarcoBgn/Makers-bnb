@@ -15,9 +15,7 @@ feature 'listing spaces' do
   # so I can distinguish my spaces,
   # I would like to be able to name them
   scenario 'I can name a space' do
-    visit('/spaces/new')
-    fill_in('name', :with => 'A beautiful relaxing space')
-    click_button 'List my Space'
+    list_space
     expect(page).to have_content('A beautiful relaxing space')
   end
 
@@ -25,12 +23,8 @@ feature 'listing spaces' do
   # So I can list all my spaces,
   # I would like to be able to add multiple spaces
   scenario 'I can list multiple spaces' do
-    visit('/spaces/new')
-    fill_in('name', :with => 'A beautiful relaxing space')
-    click_button 'List my Space'
-    visit('/spaces/new')
-    fill_in('name', :with => 'A horrible stressful space')
-    click_button 'List my Space'
+    list_space
+    list_space(name: 'A horrible stressful space')
     expect(page).to have_content('A beautiful relaxing space')
     expect(page).to have_content('A horrible stressful space')
   end
@@ -39,9 +33,7 @@ feature 'listing spaces' do
   # so the subject of my spaces is clear,
   # I would like to be able to add a description of my space
   scenario 'I can add description of my space' do
-    visit('/spaces/new')
-    fill_in('description', :with => 'It is yellow')
-    click_button 'List my Space'
+    list_space
     expect(page).to have_content('It is yellow')
   end
 
@@ -49,9 +41,7 @@ feature 'listing spaces' do
   # so I can correctly advertise my spaces,
   # I would like to be able to list the price my space costs per night
   scenario 'I can add a price for my space' do
-    visit('/spaces/new')
-    fill_in('price', :with => '5')
-    click_button 'List my Space'
+    list_space
     expect(page).to have_content('£5 per night')
   end
 
@@ -59,10 +49,7 @@ feature 'listing spaces' do
   # so that I can list the space when I want,
   # I would like to be able to add available dates to the listing
   scenario 'I can add available dates to the listing' do
-    visit('/spaces/new')
-    fill_in('available_from', :with => '2016-01-01')
-    fill_in('available_to', :with => '2016-08-01')
-    click_button 'List my Space'
+    list_space
     expect(page).to have_content('2016-01-01')
     expect(page).to have_content('2016-08-01')
   end

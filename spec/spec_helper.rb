@@ -10,6 +10,8 @@ require 'rspec'
 require 'data_mapper'
 require 'database_cleaner'
 
+require_relative 'helpers/space'
+
 Capybara.app = MakersBnb
 
 RSpec.configure do |config|
@@ -37,5 +39,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.include SpaceHelpers
 
 end
