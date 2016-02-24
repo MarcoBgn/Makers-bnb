@@ -10,3 +10,26 @@
     </form>
   </fieldset>
 </section>
+
+<script>
+   $( document ).ready(function() {
+     
+     $(function() {
+       
+       var availableDays = <%= @requested_date.to_json %>;
+       
+
+       function enableTheseDays(date) {
+         var sdate = $.datepicker.formatDate( 'yy-mm-dd', date )
+         if($.inArray(sdate, availableDays) != -1) {
+           return [true];
+         }
+         return [false];
+       }
+
+       $('#request_date_picker').datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay: enableTheseDays });
+
+     })
+   });
+      
+  </script>

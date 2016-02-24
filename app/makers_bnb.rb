@@ -6,6 +6,7 @@ require_relative 'data_mapper_setup.rb'
 require 'sinatra/flash'
 require 'sinatra/partial'
 require 'date'
+require 'json'
 
 
 class MakersBnb < Sinatra::Base
@@ -81,6 +82,11 @@ class MakersBnb < Sinatra::Base
 
   get '/requests/:space' do
     @space = Space.get(params[:space])
+    available_dates = AvailableDate.all(space_id: params[:space])
+    @formatted_dates = []
+    available_dates.each do |date|
+      @formatted_dates << date.available_date.strftime
+    end
     erb :'requests/new'
   end
 

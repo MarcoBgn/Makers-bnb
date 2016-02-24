@@ -3,6 +3,11 @@
   <head>
     <link rel='stylesheet' type='text/css' href='/style.css'>
     <title>Maker's BnB</title>
+    
+    <script type='text/javascript' src='/jquery.js'></script>
+    <script src="/jquery-ui.js"></script>
+    
+    
   </head>
 
   <body>
@@ -15,8 +20,7 @@
 
     <%= yield %>
 
-    <script type='text/javascript' src='/jquery.js'></script>
-    <script src="/jquery-ui.js"></script>
+    
     <script>
 
     $( document ).ready(function() {
@@ -27,10 +31,6 @@
 
       $(function() {
         $('#date_picker_to').datepicker({ minDate: -0, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
-      })
-
-      $(function() {
-        $('#request_date_picker').datepicker({ beforeShowDay: '16-03-12', dateFormat: 'yy-mm-dd' });
       })
 
     });
