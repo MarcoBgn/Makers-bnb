@@ -1,0 +1,12 @@
+<p><%= @space.name %></p>
+
+<section id='main'>
+  <fieldset>
+    <form action='/requests/new' method='post'>
+      <p class='in_main'> Pick a night: </p></br>
+      <p class='in_main'> <input type='text' id='request_date_picker'> </p>
+      <input type='hidden' name='space_id' value="<%= @space.id %>">
+      <p class='in_main'> <input type='submit' value='Request booking'>
+    </form>
+  </fieldset>
+</section>

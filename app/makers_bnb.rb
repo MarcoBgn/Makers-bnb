@@ -78,10 +78,16 @@ class MakersBnb < Sinatra::Base
     end
     erb :'spaces/index'
   end
-  
+
   get '/requests/:space' do
-    @space = params[:space]
-    erb :'spaces/test'
+    @space = Space.get(params[:space])
+    erb :'requests/new'
+  end
+
+  post '/requests/new' do
+    request = Request.create(user_id: current_user.id, space_id: params[:space_id])
+    flash.keep[:notice] = 'Booking requested'
+    redirect '/users/account'
   end
 
   post '/spaces' do
@@ -122,7 +128,7 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to])
+    @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to], user_id: current_user.id)
     if @space.save
       date_from = @space.available_from
       date_to = @space.available_to
