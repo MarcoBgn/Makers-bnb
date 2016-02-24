@@ -118,6 +118,16 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces/new' do
+    date_from = Date.parse(params[:available_from]) rescue nil
+    unless date_from
+      flash[:notice] = 'Please complete the required fields'
+      redirect to 'spaces/new'
+    end
+    date_to = Date.parse(params[:available_to]) rescue nil
+    unless date_to
+      flash[:notice] = 'Please complete the required fields'
+      redirect to 'spaces/new'
+    end
     if Date.parse(params[:available_from]) < Date.today || Date.parse(params[:available_to]) < Date.today
       flash[:notice] = 'do not enter a date before today'
       redirect to '/spaces/new'
