@@ -79,7 +79,7 @@ class MakersBnb < Sinatra::Base
     erb :'spaces/index'
   end
   
-  get '/spaces/:space' do
+  get '/requests/:space' do
     @space = params[:space]
     erb :'spaces/test'
   end
