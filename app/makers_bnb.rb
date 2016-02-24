@@ -87,11 +87,12 @@ class MakersBnb < Sinatra::Base
     available_dates.each do |date|
       @formatted_dates << date.available_date.strftime
     end
+    session[:array] = @formatted_dates.to_json
     erb :'requests/new'
   end
 
   post '/requests/new' do
-    request = Request.create(user_id: current_user.id, space_id: params[:space_id])
+    request = Request.create(user_id: current_user.id, space_id: params[:space])
     flash.keep[:notice] = 'Booking requested'
     redirect '/users/account'
   end

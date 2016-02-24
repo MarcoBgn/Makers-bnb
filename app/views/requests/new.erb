@@ -1,14 +1,14 @@
-<p><%= @space.name %></p>
+<h3><%= @space.name %></h3>
 
 <section id='main'>
-  <fieldset>
     <form action='/requests/new' method='post'>
-      <p class='in_main'> Pick a night: </p></br>
-      <p class='in_main'> <input type='text' id='request_date_picker'> </p>
-      <input type='hidden' name='space_id' value="<%= @space.id %>">
-      <p class='in_main'> <input type='submit' value='Request booking'>
+        <p id='pick_a_night'> Pick a night: </p></br>
+        <div id='request_date_picker'>
+          <input id='request_date' type='date'>
+          <input type='hidden' name='space_id' value="<%= @space.id %>">
+        <p class='in_main'> <input id='request' type='submit' value='Request booking'>
+      </div>
     </form>
-  </fieldset>
 </section>
 
 <script>
@@ -16,7 +16,7 @@
      
      $(function() {
        
-       var availableDays = <%= @requested_date.to_json %>;
+       var availableDays = <%= session[:array] %>;
        
 
        function enableTheseDays(date) {
@@ -27,7 +27,7 @@
          return [false];
        }
 
-       $('#request_date_picker').datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay: enableTheseDays });
+       $('#request_date_picker').datepicker({ altField: '#request_date', altFormat: "DD, d MM, yy", inline: true, dateFormat: 'yy-mm-dd', beforeShowDay: enableTheseDays });
 
      })
    });
