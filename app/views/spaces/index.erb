@@ -1,39 +1,50 @@
-
-<% if flash[:notice]%>
-  <div id='flash-error'>
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-
-<form action='/spaces/new'>
-  <button type='submit'>List a Space</button>
-</form>
-
-<form action='/spaces' method='post'>
-  <label for='available_from'>
-    Available from (DD/MM/YY)
-    <input type='text' name='available_from'>
-  </label>
-  <label for='available_to'>
-    Available to (DD/MM/YY)
-    <input type='text' name='available_to'>
-  </label>
-  <button type='submit'>List Spaces</button>
-</form>
-
-<section id='spaces'>
-<ul>
-  <% @spaces.each do |space| %>
-    <li class='list'>
-      <a id="space" href="/requests/<%= space.id %>"><section id="space">
-        <p id='title'><%= space.id %> <%= space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
-        <p id='desc'><%= space.description%></p>
-        <p>date from:<%= space.available_from%></p>
-        <p>date to:<%= space.available_to%></p>
-        <form id='space_form' action='/sessions' method='post'>
-          <input type='hidden' name='space' value"<%= space.id %>">
-        </form>
-      </section></a>
-    </li>
-    <% end %>
+<div class='space-container'>
+  <form id='list-space-button' action='/spaces/new'>
+    <button type='submit'>Add New Space</button>
+  </form>
+</div>
+  <div class='container' id='date-display'>
+  <section id='spaces'>
+    <ul>
+      <% @spaces.each do |space| %>
+      <li class='list'>
+        <a id="space" href="/requests/<%= space.id %>"><section id="space">
+          <p id='title'><%= space.id %> <%= space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
+          <p id='desc'><%= space.description%></p>
+          <p>date from:<%= space.available_from%></p>
+          <p>date to:<%= space.available_to%></p>
+          <form id='space_form' action='/sessions' method='post'>
+            <input type='hidden' name='space' value"<%= space.id %>">
+          </form>
+        </section></a>
+      </li>
+      <% end %>
+    </div>
+  <div class='container' id='date-search-box'>
+      <div class='row'>
+        <div class ="col-sm-3">
+          <p> SEARCH BY DATE: </p>
+          </div>
+          <form action='/spaces' method='post'>
+            <div class="col-sm-3">
+              <label for='available_from'>
+                Available from (DD/MM/YY)
+                <input type='text' name='available_from'>
+              </label>
+            </div>
+            <div class="col-sm-3">
+            <label for='available_to'>
+              Available to (DD/MM/YY)
+              <input type='text' name='available_to'>
+            </label>
+            </div>
+        </div>
+          <div class ='row'>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+                <button type='submit'>List Spaces</button>
+              </form>
+            </div>
+          </div>
+      </div>

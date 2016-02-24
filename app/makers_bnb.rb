@@ -94,13 +94,6 @@ class MakersBnb < Sinatra::Base
     redirect to '/spaces'
   end
 
-
-  # post '/reset_search' do
-  #   p "I am resetting the search"
-  #   session[:space_array] = nil
-  #   redirect to '/spaces'
-  # end
-
   get '/spaces/new' do
     if current_user
       @todays_date = Date.today
