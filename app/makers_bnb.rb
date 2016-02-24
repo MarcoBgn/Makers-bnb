@@ -79,6 +79,7 @@ class MakersBnb < Sinatra::Base
     else
       @spaces = Space.all
     end
+    session[:space_array] = nil
     erb :'spaces/index'
   end
 
@@ -90,13 +91,6 @@ class MakersBnb < Sinatra::Base
   post '/spaces' do
     validate_dates(params[:available_from], params[:available_to], '/spaces')
     find_available_spaces(params[:available_from], params[:available_to])
-    redirect to '/spaces'
-  end
-
-
-  post '/reset_search' do
-    p "I am resetting the search"
-    session[:space_array] = nil
     redirect to '/spaces'
   end
 
