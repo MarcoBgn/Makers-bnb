@@ -15,14 +15,15 @@
 
     <%= yield %>
     
-    <script type='text/javascript' src='jquery.js'></script>
+    <script type='text/javascript' src='/jquery.js'></script>
+    <script src="/jquery-ui.js"></script>
     <script>
     
     $( document ).ready(function() {
       
-      $('#space').on('click', function() {
-        
-      })
+      $(function() {
+        $('#date_picker').datepicker();
+      }) 
       
     });
     
