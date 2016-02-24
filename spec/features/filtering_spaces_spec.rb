@@ -45,4 +45,27 @@ feature 'filtering spaces by available dates' do
     expect(page).to have_content('A space that will also be seen')
   end
 
+  scenario 'cannot enter available from date before today' do
+    visit('/spaces')
+    fill_in('available_from', :with => Date.today.prev_day)
+    fill_in('available_to', :with => Date.today)
+    click_button 'List Spaces'
+    expect(page).to have_content('do not enter a date before today')
+  end
+
+  scenario 'cannot enter available to date before today' do
+    visit('/spaces')
+    fill_in('available_from', :with => Date.today)
+    fill_in('available_to', :with => Date.today.prev_day)
+    click_button 'List Spaces'
+    expect(page).to have_content('do not enter a date before today')
+  end
+
+  scenario 'cannot enter available to date before available from date' do
+    visit('/spaces')
+    fill_in('available_from', :with => Date.today.next_month)
+    fill_in('available_to', :with => Date.today)
+    click_button 'List Spaces'
+    expect(page).to have_content('do not enter a start date that is after the finish date')
+  end
 end

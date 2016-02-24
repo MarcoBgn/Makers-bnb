@@ -45,8 +45,29 @@ feature 'listing spaces' do
     expect{list_space(available_from: nil)}.not_to change(Space, :count)
     expect(page).to have_content('Please complete the required fields')
   end
+
   scenario "the available_to field cannot be left empty"do
     expect{list_space(available_to: nil)}.not_to change(Space, :count)
+    expect(page).to have_content('Please complete the required fields')
+  end
+
+  scenario 'cannot enter available from date before today' do
+    expect{list_space(available_from: Date.today.prev_day)}.not_to change(Space, :count)
+    expect(page).to have_content('do not enter a date before today')
+  end
+
+  scenario 'cannot enter available to date before today' do
+    expect{list_space(available_to: Date.today.prev_day)}.not_to change(Space, :count)
+    expect(page).to have_content('do not enter a date before today')
+  end
+
+  scenario 'cannot enter unrecognizable available from date' do
+    expect{list_space(available_from: 'crazy string')}.not_to change(Space, :count)
+    expect(page).to have_content('Please complete the required fields')
+  end
+
+  scenario 'cannot enter unrecognizable available to date' do
+    expect{list_space(available_to: 'crazy string')}.not_to change(Space, :count)
     expect(page).to have_content('Please complete the required fields')
   end
 end
