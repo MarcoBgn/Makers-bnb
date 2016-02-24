@@ -6,6 +6,11 @@ h1 {
   position: relative;;
 }
 
+body {
+  background-image: url("/images/background.jpg");
+  background-size: 135%;
+}
+
 input {
   display: inline-block;
   float: right;

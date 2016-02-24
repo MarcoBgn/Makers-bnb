@@ -79,6 +79,11 @@ class MakersBnb < Sinatra::Base
     end
     erb :'spaces/index'
   end
+  
+  get '/spaces/:space' do
+    @space = params[:space]
+    erb :'spaces/test'
+  end
 
   post '/spaces' do
     p "I am in post spaces"
