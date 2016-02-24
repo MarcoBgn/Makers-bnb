@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/marcobagnasco/Desktop/Projects/makers-bnb/spec/features/filtering_spaces_spec.rb": [
+      "/Users/markhill/projects/project-week/Makers-bnb/spec/features/filtering_spaces_spec.rb": [
         1,
         null,
         1,
@@ -11,16 +11,6 @@
         1,
         1,
         1,
-        null,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
         null,
         1,
         1,
@@ -39,11 +29,29 @@
         1,
         1,
         null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         null,
         null,
         null
       ],
-      "/Users/marcobagnasco/Desktop/Projects/makers-bnb/spec/features/listing_spaces_spec.rb": [
+      "/Users/markhill/projects/project-week/Makers-bnb/spec/features/listing_spaces_spec.rb": [
         null,
         1,
         null,
@@ -102,7 +110,7 @@
         null,
         null
       ],
-      "/Users/marcobagnasco/Desktop/Projects/makers-bnb/spec/features/user_management_spec.rb": [
+      "/Users/markhill/projects/project-week/Makers-bnb/spec/features/user_management_spec.rb": [
         1,
         1,
         2,
@@ -161,7 +169,7 @@
         null,
         null
       ],
-      "/Users/marcobagnasco/Desktop/Projects/makers-bnb/spec/features/viewing_spaces_spec.rb": [
+      "/Users/markhill/projects/project-week/Makers-bnb/spec/features/viewing_spaces_spec.rb": [
         1,
         null,
         1,
@@ -172,7 +180,7 @@
         null,
         null
       ],
-      "/Users/marcobagnasco/Desktop/Projects/makers-bnb/spec/user_spec.rb": [
+      "/Users/markhill/projects/project-week/Makers-bnb/spec/user_spec.rb": [
         1,
         1,
         5,
@@ -206,6 +214,6 @@
         null
       ]
     },
-    "timestamp": 1456252729
+    "timestamp": 1456263868
   }
 }
