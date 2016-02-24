@@ -34,11 +34,11 @@
       <a id="space" href="/requests/<%= space.id %>"><section id="space">
         <p id='title'><%= space.id %> <%= space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
         <p id='desc'><%= space.description%></p>
+        <p>date from:<%= space.available_from%></p>
+        <p>date to:<%= space.available_to%></p>
         <form id='space_form' action='/sessions' method='post'>
           <input type='hidden' name='space' value"<%= space.id %>">
         </form>
       </section></a>
     </li>
     <% end %>
-
-
