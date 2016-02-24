@@ -78,7 +78,7 @@ class MakersBnb < Sinatra::Base
     end
     erb :'spaces/index'
   end
-  
+
   get '/requests/:space' do
     @space = params[:space]
     erb :'spaces/test'
@@ -113,10 +113,21 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/spaces/new' do
+    @todays_date = Date.today
     erb :'spaces/new'
   end
 
   post '/spaces/new' do
+    if Date.parse(params[:available_from]) < Date.today || Date.parse(params[:available_to]) < Date.today
+      flash[:notice] = 'do not enter a date before today'
+      redirect to '/spaces/new'
+    elsif Date.parse(params[:available_from]) > Date.parse(params[:available_to])
+      flash[:notice] = 'do not enter a start date that is after the finish date'
+      redirect to '/spaces/new'
+    elsif Date.parse(params[:available_from]) > Date.today.next_year || Date.parse(params[:available_to]) > Date.today.next_year
+      flash[:notice] = 'do not enter dates that are more than a year from today'
+      redirect to '/spaces/new'
+    end
     @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to])
     if @space.save
       date_from = @space.available_from
