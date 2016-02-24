@@ -10,23 +10,42 @@
     <%= partial :greeting_message %>
 
     <%= partial :sign_up_errors %>
-    
+
     <%= partial :sign_out %>
 
     <%= yield %>
-    
+
     <script type='text/javascript' src='/jquery.js'></script>
     <script src="/jquery-ui.js"></script>
     <script>
-    
+
     $( document ).ready(function() {
-      
+
       $(function() {
         $('#date_picker').datepicker();
-      }) 
-      
+      })
+
+      $(function() {
+
+      $( "#from" ).datepicker({
+      dateFormat: "dd/mm/yy",
+      defaultDate: "+1w",
+      changeMonth: true,
+      minDate: 0,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
     });
-    
+    $( "#to" ).datepicker({
+      dateFormat: "dd/mm/yy",
+      defaultDate: "+1w",
+      changeMonth: true,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+    });
+  });
     </script>
 
   </body>
