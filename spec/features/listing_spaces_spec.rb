@@ -1,7 +1,10 @@
 
 feature 'listing spaces' do
 
- 
+  before do
+    sign_up
+  end
+
   scenario 'I can name a space' do
     list_space
     expect(page).to have_content('A beautiful relaxing space')
@@ -9,7 +12,7 @@ feature 'listing spaces' do
     expect(page).to have_content('£5 per night')
   end
 
-  
+
   scenario 'I can list multiple spaces' do
     list_space
     list_space(name: 'A horrible stressful space')
@@ -21,19 +24,12 @@ feature 'listing spaces' do
     list_space
     expect(page).to have_content('It is yellow')
     expect(page).to have_content('£5 per night')
-    expect(page).to have_content('£10 per night')
-    expect(page).to have_content('A horrible stressful space')
+    expect(page).to have_content('A beautiful relaxing space')
   end
 
   scenario 'I can add a price for my space' do
     list_space
     expect(page).to have_content('£5 per night')
-  end
-
-  scenario 'I can add available dates to the listing' do
-    list_space
-    expect(page).to have_content('2016-01-01')
-    expect(page).to have_content('2016-08-01')
   end
 
   scenario "the name field cannot be left empty"do

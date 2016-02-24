@@ -10,23 +10,31 @@
     <%= partial :greeting_message %>
 
     <%= partial :sign_up_errors %>
-    
+
     <%= partial :sign_out %>
 
     <%= yield %>
-    
+
     <script type='text/javascript' src='/jquery.js'></script>
     <script src="/jquery-ui.js"></script>
     <script>
-    
+
     $( document ).ready(function() {
-      
+
       $(function() {
-        $('#date_picker').datepicker();
-      }) 
-      
+        $('#date_picker_from').datepicker({ minDate: -0, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
+      })
+
+      $(function() {
+        $('#date_picker_to').datepicker({ minDate: -0, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
+      })
+
+      $(function() {
+        $('#request_date_picker').datepicker({ dateFormat: 'yy-mm-dd' });
+      })
+
     });
-    
+
     </script>
 
   </body>

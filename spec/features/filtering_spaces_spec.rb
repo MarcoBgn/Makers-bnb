@@ -1,6 +1,10 @@
-require 'spec_helper'
 
 feature 'filtering spaces by available dates' do
+  
+  before do
+    sign_up
+  end
+  
   scenario 'I can find a space by available dates' do
     list_space
     fill_in('available_from', :with => '2016/02/01')
