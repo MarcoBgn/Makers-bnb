@@ -1,0 +1,21 @@
+<section id='main'>
+  <form action='/edit' method='post'>
+    <input type='hidden' name='space_id' value='<%= @space.id%>'>
+     <fieldset>
+    <label for='name'>
+      <p class='in_main'>  Name:
+        <input type='text' name='name' value='<%= @space.name %>'></p></br>
+    </label>
+    <label for='description'>
+      <p class='in_main'> Description:
+       <textarea name='description'><%= @space.description%></textarea></p></br>
+    </label>
+    <label for='price'>
+     <p class='in_main'> Price per night: £
+     <input type='text' name='price' value='<%= @space.price%>'> </p></br>
+    </label>
+
+    <button type='submit' class="btn">Update Space</button>
+     </fieldset>
+  </form>
+</section>

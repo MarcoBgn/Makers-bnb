@@ -27,6 +27,20 @@ class MakersBnb < Sinatra::Base
     redirect '/users/new'
   end
 
+  get '/edit/:space_id'do
+    @space = Space.get(params[:space_id])
+    if current_user.id == @space.user_id
+      erb :'spaces/edit'
+    else
+      redirect '/users/account'
+    end
+  end
+
+  post '/edit'do
+  Space.get(params[:space_id]).update(name: params[:name], description: params[:description], price: params[:price])
+  redirect to 'users/account'
+  end
+
   get '/users/new' do
     @user = User.new
     erb :'users/new'
