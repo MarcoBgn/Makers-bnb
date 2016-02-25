@@ -1,16 +1,15 @@
 Requests
 <section class="container" id='spaces'>
   <ul class="row">
-    <% @request_display.each do |request| %>
+    <% @request_display.each do |space| %>
       <li class="list col-lg-12">
         <section id="requests">
-          <p id='title'><%=request.name%> - <span id='price'>£<%= request.price %> per night</span></p></br>
-          <p id='desc'><%=request.description%></p>
+           <p>Requesting user id: <%= space.user_id %> </p>
+          <p id='title'><%= space.name %> - <span id='price'>£<%= space.price %> per night</span></p></br>
+          <p id='desc'><%= space.description %></p>
+          <p>Requested for: <%= display_dates(@users_requests, space) %></p>
         </section>
       </li>
     <% end %>
   </ul>
 </section>
-
-
-Request for 'A Beautiful Relaxing Space'

@@ -4,7 +4,7 @@
     <form action='/requests/new' method='post'>
         <p id='pick_a_night'> Pick a night: </p></br>
         <div id='request_date_picker'>
-          <input id='request_date' type='date'>
+          <input id='request_date' name ='date_requested' type='date'>
           <input type='hidden' name='space_id' value="<%= @space.id %>">
         <p class='in_main'> <input id='request' type='submit' value='Request booking'>
       </div>
