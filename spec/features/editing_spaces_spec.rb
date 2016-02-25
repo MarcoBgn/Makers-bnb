@@ -9,6 +9,12 @@ feature 'Editing spaces' do
     Space.first.id
   end
 
+  scenario "can't edit spaces when not signed in"do
+    click_button 'Sign Out'
+    visit "/edit/#{space}"
+    expect(current_path).to eq "/sessions/new"
+  end
+
   scenario "can't edit spaces you don't own"do
     click_button 'Sign Out'
     sign_up(email: 'seconduser@email.com', username: 'seconduser')
@@ -17,7 +23,7 @@ feature 'Editing spaces' do
   end
 
   scenario 'space name can be editied after created' do
-    visit '/users/account'
+    click_button 'Account'
     expect(page).to have_content 'A beautiful relaxing space'
     first(".list").click_link("space")
     fill_in :name, with: 'My updated space'
@@ -27,7 +33,7 @@ feature 'Editing spaces' do
   end
 
   scenario 'space name can be editied after created' do
-    visit '/users/account'
+    click_button 'Account'
     expect(page).to have_content 'It is yellow'
     first(".list").click_link("space")
     fill_in :description, with: 'Oh!'
@@ -37,7 +43,7 @@ feature 'Editing spaces' do
   end
 
   scenario 'space name can be editied after created' do
-    visit '/users/account'
+    click_button 'Account'
     expect(page).to have_content '£5 per night'
     first(".list").click_link("space")
     fill_in :price, with: '10000'
