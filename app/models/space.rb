@@ -8,6 +8,9 @@ class Space
   property :available_from, Date
   property :available_to, Date
 
+  has n, :request
+  belongs_to :user
+
   #has n, :available_dates, :through => Resource
 
 end

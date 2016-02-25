@@ -3,8 +3,9 @@ feature 'listing spaces' do
   before do
     sign_up
   end
-  
+
   scenario 'I can add name, description and price to a space' do
+
     list_space
     expect(page).to have_content('A beautiful relaxing space')
     expect(page).to have_content('It is yellow')

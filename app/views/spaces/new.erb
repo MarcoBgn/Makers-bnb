@@ -15,16 +15,14 @@
     </label>
     <label for='available_from'>
       Available from (DD/MM/YY)
-      <input type='date' name='available_from' id='from' min='<%=@todays_date.strftime("%d/%m/%Y")%>'>
+      <input type='text' name='available_from' id='date_picker_from'>
     </label>
     <label for='available_to'>
       Available to (DD/MM/YY)
-      <input type='text' name='available_to' id='to'>
+      <input type='text' name='available_to' id='date_picker_to'>
     </label>
-
 
     <button type='submit'>List my Space</button>
      </fieldset>
   </form>
-
 </section>

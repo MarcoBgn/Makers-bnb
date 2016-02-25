@@ -6,6 +6,7 @@ require_relative 'data_mapper_setup.rb'
 require 'sinatra/flash'
 require 'sinatra/partial'
 require 'date'
+require 'json'
 
 require_relative 'helpers'
 
@@ -83,8 +84,20 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/requests/:space' do
-    @space = params[:space]
-    erb :'spaces/test'
+    @space = Space.get(params[:space])
+    available_dates = AvailableDate.all(space_id: params[:space])
+    @formatted_dates = []
+    available_dates.each do |date|
+      @formatted_dates << date.available_date.strftime
+    end
+    session[:array] = @formatted_dates.to_json
+    erb :'requests/new'
+  end
+
+  post '/requests/new' do
+    request = Request.create(user_id: current_user.id, space_id: params[:space_id])
+    flash.keep[:notice] = 'Booking requested'
+    redirect '/users/account'
   end
 
   post '/spaces' do
@@ -111,9 +124,10 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces/new' do
+    
     validate_dates(params[:available_from],params[:available_to], 'spaces/new')
+    @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to], user_id: current_user.id)
 
-    @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to])
     if @space.save
       date_from = @space.available_from
       date_to = @space.available_to
