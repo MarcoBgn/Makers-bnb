@@ -102,6 +102,10 @@ class MakersBnb < Sinatra::Base
     redirect '/users/account'
   end
 
+  get '/requests' do
+    erb :'requests/index'
+  end
+
   post '/spaces' do
     validate_dates(params[:available_from], params[:available_to], '/spaces')
     find_available_spaces(params[:available_from], params[:available_to])

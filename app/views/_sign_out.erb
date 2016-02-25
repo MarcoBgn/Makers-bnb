@@ -6,7 +6,12 @@
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
       <li>
-        <form action='/spaces/new'>
+        <form>
+          <button type='submit' formaction='/requests' class="btn nav-btn">Requests</button>
+        </form>
+      </li>
+      <li>
+        <form>
           <button type='submit' formaction='/spaces/new' class="btn nav-btn">List a Space</button>
         </form>
       </li>
