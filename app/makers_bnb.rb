@@ -27,6 +27,23 @@ class MakersBnb < Sinatra::Base
     redirect '/users/new'
   end
 
+  get '/edit/:space_id' do
+    unless current_user
+      redirect '/sessions/new'
+    end
+    @space = Space.get(params[:space_id])
+    if current_user.id == @space.user_id
+      erb :'spaces/edit'
+    else
+      redirect '/users/account'
+    end
+  end
+
+  post '/edit'do
+  Space.get(params[:space_id]).update(name: params[:name], description: params[:description], price: params[:price])
+  redirect to 'users/account'
+  end
+
   get '/users/new' do
     @user = User.new
     erb :'users/new'
@@ -48,8 +65,12 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/users/account' do
-    @users_spaces = Space.all(user_id: current_user.id)
-    erb :'users/account'
+    if current_user
+      @users_spaces = Space.all(user_id: current_user.id)
+      erb :'users/account'
+    else
+      redirect '/sessions/new'
+    end
   end
 
   get '/sessions/new' do
@@ -103,7 +124,15 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/requests' do
-    erb :'requests/index'
+    if current_user
+      @users_requests = Request.all(user_id: current_user.id)
+      @request_display = @users_requests.map do |x|
+          Space.get(x.space_id)
+        end
+      erb :'requests/index'
+    else
+      redirect to '/sessions/new'
+    end
   end
 
   post '/spaces' do
