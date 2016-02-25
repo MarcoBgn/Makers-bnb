@@ -57,7 +57,7 @@ class MakersBnb < Sinatra::Base
                         username: params[:username])
     if @user.save
       session[:user_id] = @user.id
-      redirect '/users/account'
+      redirect '/spaces'
     else
       flash.now[:errors] = @user.errors.full_messages
       erb :'users/new'

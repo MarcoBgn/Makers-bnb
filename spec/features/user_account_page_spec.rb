@@ -1,5 +1,11 @@
 feature 'User account' do
 
+  scenario "displays default message when no spaces have been listed"do
+    sign_up_2
+    click_button 'Account'
+    expect(page).to have_content 'You currently have no spaces listed'
+  end
+
   before do
     create_other_space
     sign_up
