@@ -8,6 +8,7 @@ require 'sinatra/partial'
 require 'date'
 require 'json'
 
+require_relative 'helpers'
 
 class MakersBnb < Sinatra::Base
 
@@ -19,6 +20,8 @@ class MakersBnb < Sinatra::Base
 
   set :partial_template_engine, :erb
   set method_override: true
+
+  helpers Helpers
 
   get '/' do
     redirect '/users/new'
@@ -98,23 +101,8 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces' do
-    date_from = Date.parse(params[:available_from])
-    date_to = Date.parse(params[:available_to])
-    available_dates = []
-    (date_from..date_to).each do |date|
-      AvailableDate.all(available_date: date).each do |x|
-        available_dates << x
-        end
-      end
-    if available_dates && !available_dates.empty?
-      available_spaces = available_dates.map do |date|
-        date.space_id
-      end
-      session[:space_array] = available_spaces.uniq
-    else
-      flash[:notice] = 'No spaces available for requested dates'
-    end
-
+    validate_dates(params[:available_from], params[:available_to], '/spaces')
+    find_available_spaces(params[:available_from], params[:available_to])
     redirect to '/spaces'
   end
 
@@ -127,6 +115,7 @@ class MakersBnb < Sinatra::Base
 
   get '/spaces/new' do
     if current_user
+      @todays_date = Date.today
       erb :'spaces/new'
     else
       flash.keep[:errors] = ['Plese login to list a space']
@@ -135,7 +124,10 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces/new' do
+    
+    validate_dates(params[:available_from],params[:available_to], 'spaces/new')
     @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to], user_id: current_user.id)
+
     if @space.save
       date_from = @space.available_from
       date_to = @space.available_to
@@ -146,12 +138,6 @@ class MakersBnb < Sinatra::Base
     else
       flash[:notice] = 'Please complete the required fields'
       redirect to '/spaces/new'
-    end
-  end
-
-  helpers do
-    def current_user
-      @current_user ||= User.get(session[:user_id])
     end
   end
 

@@ -15,15 +15,6 @@
     click_button 'Submit'
   end
   
-  
-  def create_space(name: 'A beautiful relaxing space', price: '5', description: 'It is yellow' )
-    visit('/spaces/new')
-    fill_in 'name', :with => name
-    fill_in 'price', :with => price
-    fill_in 'description', :with => description 
-    click_button 'List my Space'
-  end
-  
   def list_space(name: 'A beautiful relaxing space',
                  description: 'It is yellow',
                  price: '5',

@@ -1,15 +1,9 @@
-
-<% if flash[:notice]%>
-  <div id='flash-error'>
-    <%= flash[:notice] %>
-  </div>
-<% end %>
 <section id='main'>
   <form action='/spaces/new' method='post'>
      <fieldset>
     <label for='name'>
       <p class='in_main'>  Name:
-        <input type='text' name='name' required> </p></br>
+        <input type='text' name='name'> </p></br>
     </label>
     <label for='description'>
       <p class='in_main'> Description:

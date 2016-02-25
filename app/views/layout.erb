@@ -20,21 +20,36 @@
 
     <%= yield %>
 
-    
+
     <script>
 
     $( document ).ready(function() {
 
-      $(function() {
-        $('#date_picker_from').datepicker({ minDate: -0, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
+    
+        $('#date_picker').datepicker();
       })
 
       $(function() {
-        $('#date_picker_to').datepicker({ minDate: -0, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
-      })
 
+      $( "#date_picker_from" ).datepicker({
+      dateFormat: "dd/mm/yy",
+      defaultDate: "+1w",
+      changeMonth: true,
+      minDate: 0,
+      onClose: function( selectedDate ) {
+        $( "#date_picker_to" ).datepicker( "option", "minDate", selectedDate );
+      }
     });
-
+    $( "#date_picker_to" ).datepicker({
+      dateFormat: "dd/mm/yy",
+      defaultDate: "+1w",
+      changeMonth: true,
+      onClose: function( selectedDate ) {
+        $( "#date_picker_from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+    });
+  });
     </script>
 
   </body>
