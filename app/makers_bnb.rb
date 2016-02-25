@@ -29,7 +29,11 @@ class MakersBnb < Sinatra::Base
 
   get '/edit/:space_id'do
     @space = Space.get(params[:space_id])
-    erb :'spaces/edit'
+    if current_user.id == @space.user_id
+      erb :'spaces/edit'
+    else
+      redirect '/users/account'
+    end
   end
 
   post '/edit'do

@@ -5,6 +5,17 @@ feature 'Editing spaces' do
     list_space
   end
 
+  let!(:space) do
+    Space.first.id
+  end
+
+  scenario "can't edit spaces you don't own"do
+    click_button 'Sign Out'
+    sign_up(email: 'seconduser@email.com', username: 'seconduser')
+    visit "/edit/#{space}"
+    expect(current_path).to eq "/users/account"
+  end
+
   scenario 'space name can be editied after created' do
     visit '/users/account'
     expect(page).to have_content 'A beautiful relaxing space'
@@ -33,15 +44,6 @@ feature 'Editing spaces' do
     click_button 'Update Space'
     expect(page).not_to have_content '£5 per night'
     expect(page).to have_content '£10000 per night'
-  end
-
-
-
-  scenario "can't edit spaces you don't own"do
-    click_button 'Sign Out'
-    sign_up(email: 'seconduser@email.com', username: 'seconduser')
-    visit '/edit/1'
-    expect(page).to have_xpath('//users/account')
   end
 
 end
