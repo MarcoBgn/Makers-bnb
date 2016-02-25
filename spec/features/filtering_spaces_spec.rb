@@ -1,10 +1,10 @@
 
 feature 'filtering spaces by available dates' do
-  
+
   before do
     sign_up
   end
-  
+
   scenario 'I can find a space by available dates' do
     list_space
     fill_in('available_from', :with => '2016/07/10')
@@ -19,15 +19,6 @@ feature 'filtering spaces by available dates' do
     fill_in('available_to', :with => '2016/08/01')
     click_button 'List Spaces'
     expect(page).not_to have_content('A space that will remain unseen')
-  end
-
-  scenario "can reset search"do
-    list_space(name: 'A space that will be seen', available_from: '2016-09-01', available_to: '2016-09-05')
-    fill_in('available_from', :with => '2016/07/10')
-    fill_in('available_to', :with => '2016/08/01')
-    click_button 'List Spaces'
-    click_button 'Reset Search'
-    expect(page).to have_content('A space that will be seen')
   end
 
   scenario "nothing is shown when there are no spaces with appropriate dates"do

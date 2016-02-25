@@ -5,16 +5,16 @@
     fill_in :password_confirmation, with: password_confirmation
     fill_in :name, with: "John Smith"
     fill_in :username, with: username
-    click_button 'Sign Up'
+    click_button 'Create Account'
   end
-  
+
   def sign_in(password: 's£cr3t')
     click_button "Login"
     fill_in :email, with: 'test@ymail.com'
     fill_in :password, with: password
     click_button 'Submit'
   end
-  
+
   def list_space(name: 'A beautiful relaxing space',
                  description: 'It is yellow',
                  price: '5',
