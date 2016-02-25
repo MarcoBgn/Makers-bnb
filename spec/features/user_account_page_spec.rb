@@ -22,7 +22,7 @@ feature 'User account' do
   first(".list").click_link("space")
   fill_in :request_date, with: Date.today.strftime
   click_button 'Request booking'
-  click_button 'Account'
+  click_button 'Requests'
   expect(page).to have_content 'A terrible space'
   end
 

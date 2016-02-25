@@ -6,6 +6,12 @@
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
       <li>
+        <form>
+          <button type='submit' formaction='/requests' class="btn nav-btn">Requests</button>
+        </form>
+      </li>
+      <li>
+        <form>
         <form action='/users/account'>
           <button type='submit' formaction='/users/account' class="btn nav-btn">Account</button>
         </form>
