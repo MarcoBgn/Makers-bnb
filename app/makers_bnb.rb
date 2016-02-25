@@ -48,6 +48,7 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/users/account' do
+    @users_spaces = Space.all(user_id: current_user.id)
     erb :'users/account'
   end
 
@@ -118,7 +119,7 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/spaces/new' do
-    
+
     validate_dates(params[:available_from],params[:available_to], 'spaces/new')
     @space = Space.create(name: params[:name], description: params[:description], price: params[:price], available_from: params[:available_from], available_to: params[:available_to], user_id: current_user.id)
 

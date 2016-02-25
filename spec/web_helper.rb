@@ -28,3 +28,9 @@
     fill_in('available_to', :with => available_to)
     click_button 'List my Space'
   end
+
+  def create_other_space
+    sign_up(email: 'seconduser@email.com', username: 'seconduser')
+    list_space(name: 'A terrible space')
+    click_button 'Sign Out'
+  end
