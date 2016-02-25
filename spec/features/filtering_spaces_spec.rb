@@ -15,8 +15,8 @@ feature 'filtering spaces by available dates' do
   scenario "It doesn't show spaces that don't have required available dates" do
     list_space
     list_space(name: 'A space that will remain unseen', available_from: '2016-09-01', available_to: '2016-09-05')
-    fill_in('available_from', :with => '2016/07/10')
-    fill_in('available_to', :with => '2016/08/01')
+    fill_in('available_from', :with => Date.today.strftime)
+    fill_in('available_to', :with => Date.today.next_day.strftime)
     click_button 'List Spaces'
     expect(page).not_to have_content('A space that will remain unseen')
   end

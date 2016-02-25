@@ -18,8 +18,8 @@
   def list_space(name: 'A beautiful relaxing space',
                  description: 'It is yellow',
                  price: '5',
-                 available_from: '2016-01-01',
-                 available_to: '2016-08-01')
+                 available_from: Date.today.strftime,
+                 available_to: Date.today.next_month.strftime)
     visit('/spaces/new')
     fill_in('name', :with => name)
     fill_in('description', :with => description)

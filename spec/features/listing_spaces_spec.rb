@@ -21,8 +21,8 @@ feature 'listing spaces' do
 
   scenario 'I can add available dates to the listing' do
     list_space
-    expect(page).to have_content('2016-07-01')
-    expect(page).to have_content('2016-08-01')
+    expect(page).to have_content(Date.today.strftime)
+    expect(page).to have_content(Date.today.next_month.strftime)
   end
 
   scenario "the name field cannot be left empty"do
