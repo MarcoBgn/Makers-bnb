@@ -1,13 +1,36 @@
-<% if current_user %>
-  <form action='/sessions' method='post'>
-    <input type='hidden' name='_method' value='delete'>
-    <input class='sign_out_button' type='submit' value='Sign Out'>
-  </form>
-  <% else %>
-  <form action='/sessions/new' method='get'>
-    <input class='sign_in_button' type='submit' value='Login'>
-  </form>
-<% end %>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/spaces">Space</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+      <li>
+        <form action='/spaces/new'>
+          <button type='submit' formaction='/spaces/new' class="btn nav-btn">List a Space</button>
+        </form>
+      </li>
+      <li>
+        <form action='/sessions' method='post'>
+          <input type='hidden' name='_method' value='delete'>
+          <input class='sign_out_button btn nav-btn' type='submit' value='Sign Out'>
+        </form>
+      </li>
+      <% else %>
+      <li>
+        <form action='/users/new'>
+          <button type='submit' class="btn nav-btn">Sign Up</button>
+        </form>
+      </li>
+      <li>
+        <form action='/sessions/new' method='get'>
+          <input class='sign_in_button btn nav-btn' type='submit' value='Login'>
+        </form>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
 
 <% if flash[:notice] %>
   <div><%= flash[:notice] %></div>

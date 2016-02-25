@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <link rel='stylesheet' type='text/css' href='/style.css'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Maker's BnB</title>
-    
-    <script type='text/javascript' src='/jquery.js'></script>
-    <script src="/jquery-ui.js"></script>
-    
-    
+    <link rel='stylesheet' type='text/css' href='/css/style.css'>
+    <link href="/vendors/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
+    <header class="jumbotron">
+      <div class="container text-center">
+        <h1>Space</h1>
+        <h2>There is beauty in space</h2>
+      </div>
+    </header>
+    <main>
 
-    <%= partial :greeting_message %>
+      <%= partial :greeting_message %>
 
-    <%= partial :sign_up_errors %>
+      <%= partial :sign_up_errors %>
 
-    <%= partial :sign_out %>
+      <%= partial :sign_out %>
 
-    <%= yield %>
+      <%= yield %>
 
+
+    </main>
+
+    <script type='text/javascript' src='/vendors/js/jquery.js'></script>
+    <script src="/vendors/js/bootstrap.min.js"></script>
+    <script src="/vendors/js/jquery-ui.js"></script>
 
     <script>
 
     $( document ).ready(function() {
 
-    
+
         $('#date_picker').datepicker();
       })
 

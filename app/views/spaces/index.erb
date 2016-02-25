@@ -1,36 +1,33 @@
-
 <% if flash[:notice]%>
-  <div id='flash-error'>
-    <%= flash[:notice] %>
-  </div>
+<div id='flash-error'>
+  <%= flash[:notice] %>
+</div>
 <% end %>
 
+<h1 class="center title">Book a Space</h1>
 
-<form action='/spaces/new'>
-  <button type='submit'>List a Space</button>
+<div class="center">
+<form action='/spaces' method='post' class="form-inline" role="form">
+  <div class="form-group">
+    <label for='available_from'>
+      Available from (DD/MM/YY)
+      <input type='text' name='available_from' class="form-control">
+    </label>
+  </div>
+  <div class="form-group">
+    <label for='available_to'>
+      Available to (DD/MM/YY)
+      <input type='text' name='available_to' class="form-control">
+    </label>
+  </div>
+  <button type='submit' class="btn">List Spaces</button>
 </form>
+</div>
 
-<form action='/spaces' method='post'>
-  <label for='available_from'>
-    Available from (DD/MM/YY)
-    <input type='text' name='available_from'>
-  </label>
-  <label for='available_to'>
-    Available to (DD/MM/YY)
-    <input type='text' name='available_to'>
-  </label>
-  <button type='submit'>List Spaces</button>
-</form>
-
-<form action='/reset_search' method='post'>
-<!--   <input type='hidden' name='_method' value='delete'>
- -->  <button type='submit'>Reset Search</button>
-</form>
-
-<section id='spaces'>
-<ul>
-  <% @spaces.each do |space| %>
-    <li class='list'>
+<section class="container" id='spaces'>
+  <ul class="row">
+    <% @spaces.each do |space| %>
+    <li class="list col-lg-12">
       <a id="space" href="/requests/<%= space.id %>"><section id="space">
         <p id='title'><%= space.id %> <%= space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
         <p id='desc'><%= space.description%></p>
@@ -42,3 +39,7 @@
       </section></a>
     </li>
     <% end %>
+  </ul>
+</section>
+
+<p id="to-top"><a href="/spaces">to top</a></p>
