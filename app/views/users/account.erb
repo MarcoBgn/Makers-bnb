@@ -1,3 +1,4 @@
+Spaces
 <section class="container" id='spaces'>
   <ul class="row">
     <% @users_spaces.each do |space| %>
@@ -8,6 +9,19 @@
           <p>date from:<%=space.available_from%></p>
           <p>date to:<%=space.available_to%></p>
         </section></a>
+      </li>
+    <% end %>
+  </ul>
+</section>
+Requests
+<section class="container" id='spaces'>
+  <ul class="row">
+    <% @request_display.each do |request| %>
+      <li class="list col-lg-12">
+        <section id="requests">
+          <p id='title'><%=request.name%> - <span id='price'>£<%= request.price %> per night</span></p></br>
+          <p id='desc'><%=request.description%></p>
+        </section>
       </li>
     <% end %>
   </ul>
