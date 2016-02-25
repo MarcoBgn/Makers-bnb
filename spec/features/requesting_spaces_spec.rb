@@ -17,10 +17,9 @@ feature 'Requesting spaces' do
     click_link('Space')
     first(".list").click_link("space")
     fill_in :request_date, with: Date.today.next_day.strftime
-    click_button('Sign Out')
-    sign_in
+    click_button "Request booking"
+    expect(page).to have_content "Booking requested"
     click_button("Requests")
-    expect(page).to have_content "Request for 'A Beautiful Relaxing Space'"
+    expect(page).to have_content "Requested for: #{Date.today.next_day.strftime}"
   end
-
 end

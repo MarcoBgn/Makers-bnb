@@ -118,7 +118,8 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/requests/new' do
-    request = Request.create(user_id: current_user.id, space_id: params[:space_id])
+    date = Date.parse(params[:date_requested])
+    request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date)
     flash.keep[:notice] = 'Booking requested'
     redirect '/users/account'
   end
@@ -126,9 +127,7 @@ class MakersBnb < Sinatra::Base
   get '/requests' do
     if current_user
       @users_requests = Request.all(user_id: current_user.id)
-      @request_display = @users_requests.map do |x|
-          Space.get(x.space_id)
-        end
+      @request_display = @users_requests.map { |x| Space.get(x.space_id) }
       erb :'requests/index'
     else
       redirect to '/sessions/new'

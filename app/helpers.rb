@@ -2,6 +2,10 @@ module Helpers
   def current_user
     @current_user ||= User.get(session[:user_id])
   end
+  
+  def display_dates(requests_array, space)
+    requests_array.first(space_id: space.id).date_requested.strftime
+  end
 
   def validate_dates(params_from, params_to, route)
     date_from = Date.parse(params_from) rescue nil
