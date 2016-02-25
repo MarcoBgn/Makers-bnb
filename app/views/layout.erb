@@ -9,6 +9,11 @@
     <link href="/vendors/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    
+    <script type='text/javascript' src='/vendors/js/jquery.js'></script>
+    <script src="/vendors/js/bootstrap.min.js"></script>
+    <script src="/vendors/js/jquery-ui.js"></script>
+    
   </head>
 
   <body>
@@ -31,39 +36,35 @@
 
     </main>
 
-    <script type='text/javascript' src='/vendors/js/jquery.js'></script>
-    <script src="/vendors/js/bootstrap.min.js"></script>
-    <script src="/vendors/js/jquery-ui.js"></script>
-
     <script>
 
     $( document ).ready(function() {
-
-
-        $('#date_picker').datepicker();
-      })
-
+      
+      $('#date_picker').datepicker();
+     
       $(function() {
+      
+        $( "#date_picker_from" ).datepicker({
+          dateFormat: "dd/mm/yy",
+          defaultDate: "+1w",
+          changeMonth: true,
+          minDate: 0,
+          onClose: function( selectedDate ) { $( "#date_picker_to" ).datepicker( "option", "minDate", selectedDate ); }
+        });
+        
+        $( "#date_picker_to" ).datepicker({
+          dateFormat: "dd/mm/yy",
+          defaultDate: "+1w",
+          changeMonth: true,
+          onClose: function( selectedDate ) {  $( "#date_picker_from" ).datepicker( "option", "maxDate", selectedDate ); }
+        });
+      
+      });
+    });
 
-      $( "#date_picker_from" ).datepicker({
-      dateFormat: "dd/mm/yy",
-      defaultDate: "+1w",
-      changeMonth: true,
-      minDate: 0,
-      onClose: function( selectedDate ) {
-        $( "#date_picker_to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#date_picker_to" ).datepicker({
-      dateFormat: "dd/mm/yy",
-      defaultDate: "+1w",
-      changeMonth: true,
-      onClose: function( selectedDate ) {
-        $( "#date_picker_from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-    });
-  });
+
+
+     
     </script>
 
   </body>
