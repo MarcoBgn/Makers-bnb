@@ -27,7 +27,10 @@ class MakersBnb < Sinatra::Base
     redirect '/users/new'
   end
 
-  get '/edit/:space_id'do
+  get '/edit/:space_id' do
+    unless current_user
+      redirect '/sessions/new'
+    end
     @space = Space.get(params[:space_id])
     if current_user.id == @space.user_id
       erb :'spaces/edit'
@@ -62,8 +65,12 @@ class MakersBnb < Sinatra::Base
   end
 
   get '/users/account' do
-    @users_spaces = Space.all(user_id: current_user.id)
-    erb :'users/account'
+    if current_user
+      @users_spaces = Space.all(user_id: current_user.id)
+      erb :'users/account'
+    else
+      redirect '/sessions/new'
+    end
   end
 
   get '/sessions/new' do

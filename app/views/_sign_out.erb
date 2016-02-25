@@ -6,6 +6,11 @@
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
       <li>
+        <form action='/users/account'>
+          <button type='submit' formaction='/users/account' class="btn nav-btn">Account</button>
+        </form>
+      </li>
+      <li>
         <form action='/spaces/new'>
           <button type='submit' formaction='/spaces/new' class="btn nav-btn">List a Space</button>
         </form>
