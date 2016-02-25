@@ -67,6 +67,10 @@ class MakersBnb < Sinatra::Base
   get '/users/account' do
     if current_user
       @users_spaces = Space.all(user_id: current_user.id)
+      @users_requests = Request.all(user_id: current_user.id)
+      @request_display = @users_requests.map do |x|
+          Space.get(x.space_id)
+        end
       erb :'users/account'
     else
       redirect '/sessions/new'
