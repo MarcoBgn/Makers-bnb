@@ -18,12 +18,4 @@ feature 'User account' do
     expect(current_path).to eq '/sessions/new'
   end
 
-  scenario "shows requests made"do
-  first(".list").click_link("space")
-  fill_in :request_date, with: Date.today.strftime
-  click_button 'Request booking'
-  click_button 'Requests'
-  expect(page).to have_content 'A terrible space'
-  end
-
 end

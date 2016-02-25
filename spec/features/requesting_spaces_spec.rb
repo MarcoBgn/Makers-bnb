@@ -22,4 +22,5 @@ feature 'Requesting spaces' do
     click_button("Requests")
     expect(page).to have_content "Requested for: #{Date.today.next_day.strftime}"
   end
+
 end
