@@ -92,7 +92,7 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/requests/new' do
-    request = Request.create(user_id: current_user.id, space_id: params[:space])
+    request = Request.create(user_id: current_user.id, space_id: params[:space_id])
     flash.keep[:notice] = 'Booking requested'
     redirect '/users/account'
   end
