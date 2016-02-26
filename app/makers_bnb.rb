@@ -24,7 +24,7 @@ class MakersBnb < Sinatra::Base
   helpers Helpers
 
   get '/' do
-    redirect '/users/new'
+    redirect '/spaces'
   end
 
   get '/edit/:space_id' do
@@ -115,16 +115,27 @@ class MakersBnb < Sinatra::Base
     available_dates.each do |date|
       @formatted_dates << date.available_date.strftime
     end
+    session[:available_dates] = @formatted_dates
     session[:array] = @formatted_dates.to_json
     erb :'requests/new'
   end
 
   post '/requests/new' do
-    date = Date.parse(params[:date_requested])
-    space = Space.get(params[:space_id])
-    request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name)
-    flash.keep[:notice] = 'Booking requested'
-    redirect '/users/account'
+    unless session[:available_dates].include?(Date.parse(params[:date_requested]).strftime)
+      flash[:notice] = 'Space not available on the requested date'
+      redirect '/spaces'
+    end
+
+    if current_user
+      date = Date.parse(params[:date_requested])
+      space = Space.get(params[:space_id])
+      request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name)
+      flash.keep[:notice] = 'Booking requested'
+      redirect '/users/account'
+    else
+      flash[:notice] = 'Please log in to request a space'
+      redirect '/spaces'
+    end
   end
 
   get '/requests' do

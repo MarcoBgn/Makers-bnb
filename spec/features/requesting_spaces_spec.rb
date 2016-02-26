@@ -23,4 +23,18 @@ feature 'Requesting spaces' do
     expect(page).to have_content "Requested for: #{Date.today.next_day.strftime}"
   end
 
+  scenario "Can't request a space without logging in"do
+    click_button('Sign Out')
+    first(".list").click_link("space")
+    fill_in :request_date, with: Date.today.next_day.strftime
+    click_button "Request booking"
+    expect(page).to have_content 'Please log in to request a space'
+  end
+  scenario "Can't request a space except on available dates" do
+    first(".list").click_link("space")
+    fill_in :request_date, with: Date.today.next_month(2).strftime
+    click_button "Request booking"
+    expect(page).to have_content 'Space not available on the requested date'
+  end
+
 end
