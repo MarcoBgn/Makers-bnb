@@ -108,7 +108,7 @@ class MakersBnb < Sinatra::Base
     erb :'spaces/index'
   end
 
-  get '/requests/:space' do
+  get '/requests/book/:space' do
     @space = Space.get(params[:space])
     available_dates = AvailableDate.all(space_id: params[:space])
     @formatted_dates = []
@@ -119,7 +119,39 @@ class MakersBnb < Sinatra::Base
     session[:array] = @formatted_dates.to_json
     erb :'requests/new'
   end
+  
+  get '/requests/confirm/:request_id' do
+    @request_received = Request.get(params[:request_id])
+    @requests_count = Request.all(space_id: @request_received.space_id).count
+     erb :'/requests/confirm'
+  end
 
+  post '/requests/confirm' do
+    @confirm_request = Request.get(params[:confirm_request])
+    @confirm_request.update(:status => :confirmed)
+    @requests_for_same_space = Request.all(space_id: params[:space_requested])
+    @requests_for_same_space.each do |request|
+      unless request.status == "confirmed" 
+        request.update(:status => :denied)
+      end
+    end
+    date = Date.parse(params[:date_requested])
+    @available_dates_array = AvailableDate.all(space_id: params[:space_requested])
+    @available_dates_array.each do |aval_date|
+      if aval_date.available_date == date
+       p aval_date.destroy
+      end
+    end
+        
+    redirect '/requests'
+  end
+  
+  post '/requests/deny' do
+    @deny_request = Request.get(params[:deny_request])
+    @deny_request.update(:status => :denied)
+    redirect '/requests'
+  end
+  
   post '/requests/new' do
 
     requested_date = Date.parse(params[:date_requested]) rescue nil
@@ -141,17 +173,13 @@ class MakersBnb < Sinatra::Base
       end
       date = Date.parse(params[:date_requested])
       space = Space.get(params[:space_id])
-      request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name, requested_by: current_user.name)
+      request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id)
       flash.keep[:notice] = 'Booking requested'
       redirect '/users/account'
     else
       flash[:notice] = 'Please log in to request a space'
       redirect '/spaces'
     end
-  end
-
-  get '/requests/confirm/:request_id' do
-    
   end
 
   get '/requests' do
