@@ -9,6 +9,10 @@ feature 'Requests' do
     click_button 'Request booking'
   end
 
+  let!(:request) do
+    Request.first.id
+  end
+
   scenario "shows requests made" do
     click_button 'Requests'
     expect(page).to have_content 'A terrible space'
@@ -19,6 +23,16 @@ feature 'Requests' do
     sign_in(email: 'seconduser@email.com')
     click_button 'Requests'
     expect(page).to have_content 'A terrible space'
+    expect(page).to have_content Date.today.strftime
+    expect(page).to have_content 'John Smith'
+  end
+
+  scenario "can click requests to view them" do
+    click_button 'Sign Out'
+    sign_in(email: 'seconduser@email.com')
+    click_button 'Requests'
+    first(".list").click_link("request")
+    expect(current_path).to eq "/requests/confirm/#{request}"
   end
 
 end

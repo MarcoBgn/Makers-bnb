@@ -46,4 +46,12 @@ feature 'Requesting spaces' do
     expect(page).to have_content "This is your own space"
   end
 
+  scenario "Can't request space with invalid date" do
+    first(".list").click_link("space")
+    fill_in :request_date, with: "gobble-dee-gook"
+    expect{click_button 'Request booking'}.not_to change(Request, :count)
+    expect(current_path).to eq '/spaces'
+    expect(page).to have_content 'Please enter a valid date'
+  end
+
 end

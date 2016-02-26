@@ -122,6 +122,13 @@ class MakersBnb < Sinatra::Base
 
   post '/requests/new' do
 
+    requested_date = Date.parse(params[:date_requested]) rescue nil
+
+    unless requested_date
+      flash[:notice] = 'Please enter a valid date'
+      redirect '/spaces'
+    end
+
     unless session[:available_dates].include?(Date.parse(params[:date_requested]).strftime)
       flash[:notice] = 'Space not available on the requested date'
       redirect '/spaces'
@@ -134,13 +141,17 @@ class MakersBnb < Sinatra::Base
       end
       date = Date.parse(params[:date_requested])
       space = Space.get(params[:space_id])
-      request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name)
+      request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name, requested_by: current_user.name)
       flash.keep[:notice] = 'Booking requested'
       redirect '/users/account'
     else
       flash[:notice] = 'Please log in to request a space'
       redirect '/spaces'
     end
+  end
+
+  get '/requests/confirm/:request_id' do
+    
   end
 
   get '/requests' do

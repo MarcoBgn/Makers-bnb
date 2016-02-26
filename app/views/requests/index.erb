@@ -4,12 +4,9 @@ Requests made:
     <% @request_display.each do |space| %>
       <li class="list col-lg-12">
         <section id="requests">
-           <p>Requesting user id: <%= space.user_id %> </p>
           <p id='title'><%= space.name %> - <span id='price'>£<%= space.price %> per night</span></p></br>
           <p id='desc'><%= space.description %></p>
           <p>Requested for: <%= display_dates(@users_requests, space) %></p>
-          <p id='title'><%=space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
-          <p id='desc'><%=space.description%></p>
         </section>
       </li>
     <% end %>
@@ -23,9 +20,13 @@ Request received:
   <ul class="row">
     <% @received_requests.each do |request| %>
       <li class="list col-lg-12">
-        <section id="requests">
-          <p id='title'><%=request.space_name%>
-        </section>
+        <a id="request" href="/requests/confirm/<%=request.id%>"><section id="space">
+          <section id="requests">
+            <p id='title'><%=request.space_name%> </p> </br>
+            <p id='title'><%=request.date_requested%> </p> </br>
+            <p id='title'><%=request.requested_by%> </p>
+          </section>
+        </a>
       </li>
     <% end %>
   </ul>
