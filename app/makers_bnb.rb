@@ -120,11 +120,19 @@ class MakersBnb < Sinatra::Base
     erb :'requests/new'
   end
   
-  get '/requests/confirm/:request' do
-    
+  get '/requests/confirm/1' do
+    p Request.all
+    @request_received = Request.get(1)
+    @requests_count = Request.all(space_id: @request_received.space_id).count
+     erb :'/requests/confirm'
+  end
+
+  post '/requests/confirm' do
+    @confirm_request = Request.get(params[:confirm_request])
+    @confirm_request.update(:status => :confirmed)
+    redirect '/requests'
   end
   
-
   post '/requests/new' do
 
     unless session[:available_dates].include?(Date.parse(params[:date_requested]).strftime)
