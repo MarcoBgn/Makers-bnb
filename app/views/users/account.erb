@@ -1,4 +1,9 @@
-Spaces
+<h3>Your spaces</h3>
+<br>
+<p>Click a space to edit it:</p>
+<% if @users_spaces.empty? %>
+<p>You currently have no spaces listed</p>
+<% else %>
 <section class="container" id='spaces'>
   <ul class="row">
     <% @users_spaces.each do |space| %>
@@ -13,3 +18,4 @@ Spaces
     <% end %>
   </ul>
 </section>
+<% end %>

@@ -1,5 +1,11 @@
 feature 'User account' do
 
+  scenario "displays default message when no spaces have been listed"do
+    sign_up_2
+    click_button 'Account'
+    expect(page).to have_content 'You currently have no spaces listed'
+  end
+
   before do
     create_other_space
     sign_up
@@ -16,14 +22,6 @@ feature 'User account' do
     click_button 'Sign Out'
     visit '/users/account'
     expect(current_path).to eq '/sessions/new'
-  end
-
-  scenario "shows requests made"do
-  first(".list").click_link("space")
-  fill_in :request_date, with: Date.today.strftime
-  click_button 'Request booking'
-  click_button 'Requests'
-  expect(page).to have_content 'A terrible space'
   end
 
 end
