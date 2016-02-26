@@ -106,7 +106,7 @@ class MakersBnb < Sinatra::Base
     erb :'spaces/index'
   end
 
-  get '/requests/:space' do
+  get '/requests/book/:space' do
     @space = Space.get(params[:space])
     available_dates = AvailableDate.all(space_id: params[:space])
     @formatted_dates = []
@@ -116,6 +116,11 @@ class MakersBnb < Sinatra::Base
     session[:array] = @formatted_dates.to_json
     erb :'requests/new'
   end
+  
+  get '/requests/confirm/:request' do
+    
+  end
+  
 
   post '/requests/new' do
     date = Date.parse(params[:date_requested])

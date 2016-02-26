@@ -4,7 +4,6 @@ Requests
     <% @request_display.each do |space| %>
       <li class="list col-lg-12">
         <section id="requests">
-           <p>Requesting user id: <%= space.user_id %> </p>
           <p id='title'><%= space.name %> - <span id='price'>£<%= space.price %> per night</span></p></br>
           <p id='desc'><%= space.description %></p>
           <p>Requested for: <%= display_dates(@users_requests, space) %></p>
