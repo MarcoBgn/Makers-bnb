@@ -4,10 +4,7 @@ class Request
   property :id, Serial
   property :date_requested, Date
   property :owner_id, Integer
-  property :space_name, String
-  property :status, String, :default => :pending
-  
-  
+  property :status, String, :default => "not confirmed"
 
   belongs_to :user
   belongs_to :space
