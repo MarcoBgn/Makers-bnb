@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maker's BnB</title>
+    <title>Space</title>
     <link rel='stylesheet' type='text/css' href='/css/style.css'>
     <link href="/vendors/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-    
+
     <script type='text/javascript' src='/vendors/js/jquery.js'></script>
     <script src="/vendors/js/bootstrap.min.js"></script>
     <script src="/vendors/js/jquery-ui.js"></script>
-    
+
   </head>
 
   <body>
@@ -24,8 +24,6 @@
       </div>
     </header>
     <main>
-
-      <%= partial :greeting_message %>
 
       <%= partial :sign_up_errors %>
 
@@ -39,11 +37,11 @@
     <script>
 
     $( document ).ready(function() {
-      
+
       $('#date_picker').datepicker();
-     
+
       $(function() {
-      
+
         $( "#date_picker_from" ).datepicker({
           dateFormat: "dd/mm/yy",
           defaultDate: "+1w",
@@ -51,20 +49,20 @@
           minDate: 0,
           onClose: function( selectedDate ) { $( "#date_picker_to" ).datepicker( "option", "minDate", selectedDate ); }
         });
-        
+
         $( "#date_picker_to" ).datepicker({
           dateFormat: "dd/mm/yy",
           defaultDate: "+1w",
           changeMonth: true,
           onClose: function( selectedDate ) {  $( "#date_picker_from" ).datepicker( "option", "maxDate", selectedDate ); }
         });
-      
+
       });
     });
 
 
 
-     
+
     </script>
 
   </body>

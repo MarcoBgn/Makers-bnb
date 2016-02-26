@@ -1,5 +1,5 @@
   def sign_up(email: 'test@ymail.com', password_confirmation: 's£cr3t', username: 'user123')
-    visit '/'
+    visit '/users/new'
     fill_in :email, with: email
     fill_in :password, with: "s£cr3t"
     fill_in :password_confirmation, with: password_confirmation
@@ -8,9 +8,19 @@
     click_button 'Create Account'
   end
 
-  def sign_in(password: 's£cr3t')
+  def sign_up_2(email: 'bob@ymail.com', password_confirmation: '123', username: 'bob')
+    visit '/users/new'
+    fill_in :email, with: email
+    fill_in :password, with: "123"
+    fill_in :password_confirmation, with: password_confirmation
+    fill_in :name, with: "Bob Smith"
+    fill_in :username, with: username
+    click_button 'Create Account'
+  end
+
+  def sign_in(email: 'test@ymail.com', password: 's£cr3t')
     click_button "Login"
-    fill_in :email, with: 'test@ymail.com'
+    fill_in :email, with: email
     fill_in :password, with: password
     click_button 'Submit'
   end

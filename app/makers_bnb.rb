@@ -24,7 +24,7 @@ class MakersBnb < Sinatra::Base
   helpers Helpers
 
   get '/' do
-    redirect '/users/new'
+    redirect '/spaces'
   end
 
   get '/edit/:space_id' do
@@ -57,7 +57,8 @@ class MakersBnb < Sinatra::Base
                         username: params[:username])
     if @user.save
       session[:user_id] = @user.id
-      redirect '/users/account'
+      flash[:notice] = "Welcome, #{@user.name}"
+      redirect '/spaces'
     else
       flash.now[:errors] = @user.errors.full_messages
       erb :'users/new'
@@ -78,9 +79,10 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/sessions' do
-    user = User.authenticate(params[:email], params[:password])
-    if user
-      session[:user_id] = user.id
+    @user = User.authenticate(params[:email], params[:password])
+    if @user
+      session[:user_id] = @user.id
+      flash[:notice] = flash[:notice] = "Welcome, #{@user.name}"
       redirect '/spaces'
     else
       flash.now[:errors] = ['The email or password is incorrect']
@@ -113,6 +115,7 @@ class MakersBnb < Sinatra::Base
     available_dates.each do |date|
       @formatted_dates << date.available_date.strftime
     end
+    session[:available_dates] = @formatted_dates
     session[:array] = @formatted_dates.to_json
     erb :'requests/new'
   end
@@ -123,16 +126,35 @@ class MakersBnb < Sinatra::Base
   
 
   post '/requests/new' do
-    date = Date.parse(params[:date_requested])
-    request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date)
-    flash.keep[:notice] = 'Booking requested'
-    redirect '/users/account'
+
+    unless session[:available_dates].include?(Date.parse(params[:date_requested]).strftime)
+      flash[:notice] = 'Space not available on the requested date'
+      redirect '/spaces'
+    end
+
+    if current_user
+      unless current_user.id != Space.get(params[:space_id]).user_id
+        flash[:notice] = 'This is your own space'
+        redirect '/spaces'
+      end
+      date = Date.parse(params[:date_requested])
+      space = Space.get(params[:space_id])
+      request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name)
+      flash.keep[:notice] = 'Booking requested'
+      redirect '/users/account'
+    else
+      flash[:notice] = 'Please log in to request a space'
+      redirect '/spaces'
+    end
   end
 
   get '/requests' do
     if current_user
       @users_requests = Request.all(user_id: current_user.id)
-      @request_display = @users_requests.map { |x| Space.get(x.space_id) }
+      @received_requests = Request.all(owner_id: current_user.id)
+      @request_display = @users_requests.map do |x|
+        Space.get(x.space_id)
+      end
       erb :'requests/index'
     else
       redirect to '/sessions/new'

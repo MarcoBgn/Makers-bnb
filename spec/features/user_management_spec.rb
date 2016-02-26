@@ -17,6 +17,10 @@ feature 'User Management Feature:' do
       sign_up
     end
 
+    scenario 'the user is directed to the spaces page'do
+    expect(current_path).to eq "/spaces"
+    end
+
     scenario "Can't sign up when email is already in use" do
       expect{sign_up}.not_to change(User, :count)
       expect(page).to have_content 'Email is already taken'
