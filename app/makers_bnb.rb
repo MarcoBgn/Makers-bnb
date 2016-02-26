@@ -121,12 +121,17 @@ class MakersBnb < Sinatra::Base
   end
 
   post '/requests/new' do
+
     unless session[:available_dates].include?(Date.parse(params[:date_requested]).strftime)
       flash[:notice] = 'Space not available on the requested date'
       redirect '/spaces'
     end
 
     if current_user
+      unless current_user.id != Space.get(params[:space_id]).user_id
+        flash[:notice] = 'This is your own space'
+        redirect '/spaces'
+      end
       date = Date.parse(params[:date_requested])
       space = Space.get(params[:space_id])
       request = Request.create(user_id: current_user.id, space_id: params[:space_id], date_requested: date, owner_id: space.user_id, space_name: space.name)
