@@ -3,11 +3,13 @@ Requests made:
   <ul class="row">
     <% @request_display.each do |space| %>
       <li class="list col-lg-12">
-        <section id="requests">
+
+        <section id="requests_made">
           <p id='title'><%= space.name %> - <span id='price'>£<%= space.price %> per night</span></p></br>
           <p id='desc'><%= space.description %></p>
           <p>Requested for: <%= display_dates(@users_requests, space) %></p>
-        </section>
+          <p> Request status: <%= @users_requests.first(space_id: space.id).status %></p>
+        </section> 
       </li>
     <% end %>
   </ul>
@@ -20,11 +22,14 @@ Request received:
   <ul class="row">
     <% @received_requests.each do |request| %>
       <li class="list col-lg-12">
-        <a id="request" href="/requests/confirm/<%=request.id%>"><section id="space">
+
+        <section id="requests_received">
+        <a id="request" href="/requests/confirm/<%= request.id %>"><section id="space">
           <section id="requests">
-            <p id='title'><%=request.space_name%> </p> </br>
-            <p id='title'><%=request.date_requested%> </p> </br>
-            <p id='title'><%=request.requested_by%> </p>
+            <p id='title'>Space requested: <%= request.space.name %> </p> </br>
+            <p id='title'>Requested on: <%= request.date_requested %> </p> </br>
+            <p id='title'>Requested by: <%= request.user.name %> - <%= request.user.email %> </p>
+            <p> Request status: <%= request.status %> </p>
           </section>
         </a>
       </li>

@@ -23,7 +23,7 @@
   <ul class="row">
     <% @spaces.each do |space| %>
     <li class="list col-lg-12">
-      <a id="space" href="/requests/<%= space.id %>"><section id="space">
+      <a id="space" href="/requests/book/<%= space.id %>"><section id="space">
         <p id='title'><%= space.id %> <%= space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
         <p id='desc'><%= space.description%></p>
         <p>date from:<%= space.available_from%></p>
