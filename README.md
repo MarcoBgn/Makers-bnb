@@ -10,6 +10,11 @@ Authors
 
 * Yan-Yi Li, Matt Drake, Mark Hill and Marco Bagnasco @ Makers Academy (Ronin) - Week 6
 
+Main Page
+---------
+
+![Space](/app/public/images/ScreenShot1.png?raw=true "Screen Shot 1")
+
 ```
 Headline specifications
 ● Any signed-up user can list a new space.
