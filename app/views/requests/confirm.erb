@@ -1,24 +1,27 @@
-<h1>Request for: A terrible space</h1>
+<h1 class="center title">Request for '<%= @request_received.space.name %>'</h1>
 
-
+<div class="container center">
+  <div class="row">
 <p> From: <%= @request_received.user.email %></p>
 
 <p> Date: <%= @request_received.date_requested %></p>
 
 <p> No. of requests for this space: <%= @requests_count  %></p>
 
-      <section id="confirm_request"> 
-        <form method='post'>
+      <section id="confirm_request">
+        <form method='post' role="form">
           <input type='hidden' name='confirm_request' value='<%= @request_received.id %>'>
            <input type='hidden' name='space_requested' value='<%= @request_received.space_id %>'>
            <input type='hidden' name='date_requested' value='<%= @request_received.date_requested %>'>
-          <input id='confirm_button' type='submit' formaction='/requests/confirm' value="Confirm request from: <%= @request_received.user.email %>">
+          <input id='confirm_button' class="btn" type='submit' formaction='/requests/confirm' value="Confirm request from: <%= @request_received.user.email %>">
         </form>
       </section>
-      
-      <section id="deny_request"> 
-        <form method='post'>
+
+      <section id="deny_request">
+        <form method='post' role="form">
           <input type='hidden' name='deny_request' value='<%= @request_received.id %>'>
-          <input id='deny_button'type='submit' formaction='/requests/deny' value="Deny request from: <%= @request_received.user.email %>">
+          <input id='deny_button' class="btn" type='submit' formaction='/requests/deny' value="Deny request from: <%= @request_received.user.email %>">
         </form>
       </section>
+    </div>
+  </div>

@@ -1,28 +1,46 @@
 <section id='main'>
-  <form action='/spaces/new' method='post'>
-     <fieldset>
-    <label for='name'>
-      <p class='in_main'>  Name:
-        <input type='text' name='name'> </p></br>
-    </label>
-    <label for='description'>
-      <p class='in_main'> Description:
-       <textarea name='description'></textarea></p></br>
-    </label>
-    <label for='price'>
-     <p class='in_main'> Price per night: £
-     <input type='text' name='price' required> </p></br>
-    </label>
-    <label for='available_from'>
-      Available from (DD/MM/YY)
-      <input type='text' name='available_from' id='date_picker_from'>
-    </label>
-    <label for='available_to'>
-      Available to (DD/MM/YY)
-      <input type='text' name='available_to' id='date_picker_to'>
-    </label>
-
-    <button type='submit' class="btn">List my Space</button>
-     </fieldset>
-  </form>
+  <h1 class="center title">List a <span class="logo">Space</span></h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2">
+        <form action='/spaces/new' method='post' class="form-horizontal" role="form">
+         <fieldset>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for='name'>Name:</label>
+            <div class="col-sm-9">
+              <input type='text' name='name' class="form-control"> </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for='description'>Description:</label>
+            <div class="col-sm-9">
+              <textarea name='description' class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for='price'>Price per night: £</label>
+            <div class="col-sm-9">
+             <input type='text' name='price' class="form-control" required>
+           </div>
+         </div>
+         <div class="form-group">
+          <label class="control-label col-sm-3" for='available_from'>Available from</label>
+          <div class="col-sm-9">
+            <input type='text' name='available_from' id='date_picker_from' class="form-control" placeholder="DD/MM/YY">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3" for='available_to'>Available to</label>
+          <div class="col-sm-9">
+            <input type='text' name='available_to' id='date_picker_to' class="form-control" placeholder="DD/MM/YY">
+          </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3">
+          <button type='submit' class="btn">List my Space</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</div>
 </section>

@@ -1,48 +1,59 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" href="/spaces">Space</a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <% if current_user %>
-      <li>
-        <form>
-          <button type='submit' formaction='/requests' class="btn nav-btn">Requests</button>
-        </form>
-      </li>
-      <li>
-        <form>
-        <form action='/users/account'>
-          <button type='submit' formaction='/users/account' class="btn nav-btn">Account</button>
-        </form>
-      </li>
-      <li>
-        <form action='/spaces/new'>
-          <button type='submit' formaction='/spaces/new' class="btn nav-btn">List a Space</button>
-        </form>
-      </li>
-      <li>
-        <form action='/sessions' method='post'>
-          <input type='hidden' name='_method' value='delete'>
-          <input class='sign_out_button btn nav-btn' type='submit' value='Sign Out'>
-        </form>
-      </li>
-      <% else %>
-      <li>
-        <form action='/users/new'>
-          <button type='submit' class="btn nav-btn">Sign Up</button>
-        </form>
-      </li>
-      <li>
-        <form action='/sessions/new' method='get'>
-          <input class='sign_in_button btn nav-btn' type='submit' value='Login'>
-        </form>
-      </li>
-      <% end %>
-    </ul>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <form action='/spaces'>
+            <button type='submit' class="btn nav-btn">Spaces</button>
+          </form>
+        </li>
+        <% if current_user %>
+        <li>
+          <form action='/spaces/new'>
+            <button type='submit' formaction='/spaces/new' class="btn nav-btn">List a Space</button>
+          </form>
+        </li>
+        <li>
+          <form>
+            <button type='submit' formaction='/requests' class="btn nav-btn">Requests</button>
+          </form>
+        </li>
+        <li>
+          <form action='/users/account'>
+            <button type='submit' formaction='/users/account' class="btn nav-btn">Account</button>
+          </form>
+        </li>
+        <li>
+          <form action='/sessions' method='post'>
+            <input type='hidden' name='_method' value='delete'>
+            <input class='sign_out_button btn nav-btn' type='submit' value='Sign Out'>
+          </form>
+        </li>
+        <% else %>
+        <li>
+          <form action='/sessions/new' method='get'>
+            <input class='sign_in_button btn nav-btn' type='submit' value='Login'>
+          </form>
+        </li>
+        <li>
+          <form action='/users/new'>
+            <button type='submit' class="btn nav-btn sign-up-btn">Sign Up</button>
+          </form>
+        </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>
 
 <% if flash[:notice] %>
-  <div><%= flash[:notice] %></div>
+<div id="notice"><%= flash[:notice] %></div>
 <% end %>

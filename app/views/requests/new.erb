@@ -1,35 +1,41 @@
-<h3><%= @space.name %></h3>
+<h3 class="center"><%= @space.name %></h3>
 
 <section id='main'>
-    <form action='/requests/new' method='post'>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2 center">
+      <form action='/requests/new' method='post' role ="form">
         <p id='pick_a_night'> Pick a night: </p></br>
         <div id='request_date_picker'>
           <input id='request_date' name ='date_requested' type='text'>
           <input type='hidden' name='space_id' value="<%= @space.id %>">
-        <p class='in_main'> <input id='request' type='submit' value='Request booking'>
-      </div>
-    </form>
+          <input id='request' class="btn" type='submit' value='Request booking'>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 </section>
 
 <script>
-   $( document ).ready(function() {
+$( document ).ready(function() {
 
-     $(function() {
+ $(function() {
 
-       var availableDays = <%= session[:array] %>;
+   var availableDays = <%= session[:array] %>;
 
 
-       function enableTheseDays(date) {
-         var sdate = $.datepicker.formatDate( 'yy-mm-dd', date )
-         if($.inArray(sdate, availableDays) != -1) {
-           return [true];
-         }
-         return [false];
-       }
+   function enableTheseDays(date) {
+     var sdate = $.datepicker.formatDate( 'yy-mm-dd', date )
+     if($.inArray(sdate, availableDays) != -1) {
+       return [true];
+     }
+     return [false];
+   }
 
-       $('#request_date_picker').datepicker({ altField: '#request_date', altFormat: "DD, d MM, yy", inline: true, dateFormat: 'yy-mm-dd', beforeShowDay: enableTheseDays });
+   $('#request_date_picker').datepicker({ altField: '#request_date', altFormat: "DD, d MM, yy", inline: true, dateFormat: 'yy-mm-dd', beforeShowDay: enableTheseDays });
 
-     })
-   });
+ })
+});
 
-  </script>
+</script>

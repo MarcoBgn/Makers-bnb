@@ -1,26 +1,16 @@
-.jumbotron {
-  position: relative;
-  background: #000 url("/images/background.jpg") center center;
-  width: 100%;
+html, body, {
   height: 100%;
+}
+
+.jumbotron {
+  margin-bottom: 0 !important;
+  position: relative;
+  background: #fb4743 url("/images/background.jpg") center center;
+  width: 100%;
+  height: 40%;
   background-size: cover;
   opacity: 0.75;
   overflow: hidden;
-}
-
-.ui-datepicker {
-    font-size: 18px !important;
-    width: 360px;
-    height: auto;
-    margin: 5px auto 0;
-    font: 9pt Arial, sans-serif;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(20, 0, 0, .5);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-    cursor: pointer;
-    position: relative;
-    top: -60px;
-    left: -80px;
 }
 
 header .container {
@@ -32,14 +22,31 @@ body {
   font-family: 'Lato', sans-serif !important;
 }
 
+main {
+  background-color: #f7f6f6;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: 100%;
+}
+
+main .container {
+  padding: 50px;
+  background-color: #fff !important;
+}
+
 .title {
-  color: #999 !important;
+  padding: 30px;
+  color: #565a5c !important;
+}
+
+.logo {
+  font-family: 'Nunito', sans-serif;
 }
 
 .navbar {
   background-color: #fb4743 !important;
   border: none !important;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .navbar-brand {
@@ -47,13 +54,11 @@ body {
   color: #fff !important;
 }
 
-.nav-btn {
-}
-
 .btn {
+  margin: 5px ;
   border: 1px solid #e6ebe0 !important;
   border-radius: 2px !important;
-  background: #fff;
+  background-color: #fff;
   color: #fb4743;
 }
 
@@ -61,24 +66,62 @@ body {
   border: none;
   color: #fff !important;
   background-color: #fb4743;
+  opacity: 0.85;
+}
+
+.nav-btn {
+  color: #fff !important;
+  background-color: #fb4743 !important;
+  border: none !important;
+}
+
+.nav-btn:hover {
+  color: #ddd !important;
+}
+
+.sign-up-btn {
+  border: 1px solid #e6ebe0 !important;
+}
+
+.sign-up-btn:hover {
+  background-color: #fc7e7b !important;
+  color: #fff !important;
 }
 
 .center {
   text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+h3 {
+  padding: 10px;
 }
 
 label {
   color: #555;
+  padding: 5px;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .list {
   list-style: none;
+  margin: 10px;
+  padding: 20px;
   border: 1px solid #ccc;
   background-color: #fff;
 }
 
 .list:last-child {
   margin-bottom: 50px;
+}
+
+.name, .price {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 a {
@@ -102,4 +145,87 @@ p {
 
 #to-top a:hover {
   color: #999;
+}
+
+#notice {
+  text-align: center;
+}
+
+#errors {
+  text-align: center;
+  list-style: none;
+  color: #fb4743;
+}
+
+.ui-datepicker {
+  background-color: #fff;
+  padding: 10px;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 18px !important;
+  height: auto;
+  width: 260px;
+  margin: 5px auto 0;
+  cursor: pointer;
+  position: relative;
+  top: 30px;
+}
+
+.ui-datepicker table {
+  width: 100%;
+}
+
+.ui-datepicker-header {
+  color: #fb4743;
+  opacity: 0.8;
+}
+
+.ui-datepicker-month {
+  ;
+}
+
+.ui-datepicker-title {
+  text-align: center;
+}
+
+.ui-datepicker-prev {
+  color: #fb4743;
+  opacity: 0.8;
+  float: left;
+  background-position: center -30px;
+}
+
+.ui-datepicker-next {
+  color: #fb4743;
+  opacity: 0.8;
+  float: right;
+  background-position: center 0px;
+}
+
+.ui-datepicker th {
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+.ui-datepicker tbody td {
+   text-align: center;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #666666;
+    text-shadow: 1px 1px 0px #fff;
+    filter: dropshadow(color=#fff, offx=1, offy=1);
+}
+
+.ui-datepicker-unselectable .ui-state-default {
+    color: #b4b3b3;
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+   color: #bbb;
 }

@@ -1,38 +1,48 @@
-Requests made:
-<section class="container" id='spaces'>
-  <ul class="row">
-    <% @request_display.each do |space| %>
-      <li class="list col-lg-12">
+<h1 class="center title">Requests</h1>
 
-        <section id="requests_made">
-          <p id='title'><%= space.name %> - <span id='price'>£<%= space.price %> per night</span></p></br>
-          <p id='desc'><%= space.description %></p>
-          <p>Requested for: <%= display_dates(@users_requests, space) %></p>
-          <p> Request status: <%= @users_requests.first(space_id: space.id).status %></p>
-        </section> 
-      </li>
-    <% end %>
-  </ul>
-</section>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 class="center">Requests made</h2>
+      <section id='spaces'>
+        <ul>
+          <% @request_display.each do |space| %>
+          <li  class="list">
 
+            <section id="requests_made">
+              <p class='name'><%= space.name %> - <span class='price'>£<%= space.price %> per night</span></p></br>
+              <p class='desc'><%= space.description %></p>
+              <p>Requested for: <%= display_dates(@users_requests, space) %></p>
+              <p> Request status: <%= @users_requests.first(space_id: space.id).status %></p>
+            </section>
+          </li>
+          <% end %>
+        </ul>
+      </section>
+    </div>
 
-
-Request received:
-<section class="container" id='spaces'>
-  <ul class="row">
-    <% @received_requests.each do |request| %>
-      <li class="list col-lg-12">
-
-        <section id="requests_received">
-        <a id="request" href="/requests/confirm/<%= request.id %>"><section id="space">
-          <section id="requests">
-            <p id='title'>Space requested: <%= request.space.name %> </p> </br>
-            <p id='title'>Requested on: <%= request.date_requested %> </p> </br>
-            <p id='title'>Requested by: <%= request.user.name %> - <%= request.user.email %> </p>
-            <p> Request status: <%= request.status %> </p>
-          </section>
-        </a>
-      </li>
-    <% end %>
-  </ul>
-</section>
+    <div class="col-sm-6">
+      <h3 class="center">Request received</h2>
+      <section id='spaces'>
+        <ul>
+          <% @received_requests.each do |request| %>
+          <li class="list">
+            <section id="requests_received">
+              <a id="request" href="/requests/confirm/<%= request.id %>">
+                <section id="space">
+                  <section id="requests">
+                    <p class='name'>Space requested: <%= request.space.name %> </p> </br>
+                    <p class='desc'>Requested on: <%= request.date_requested %> </p> </br>
+                    <p class='desc'>Requested by: <%= request.user.name %> - <%= request.user.email %> </p>
+                    <p> Request status: <%= request.status %> </p>
+                  </section>
+                </section>
+              </a>
+            </section>
+          </li>
+          <% end %>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
