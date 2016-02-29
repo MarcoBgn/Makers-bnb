@@ -9,8 +9,4 @@ class MakersBnb < Sinatra::Base
   enable :partial_underscores
   set method_override: true
 
-  get '/' do
-    redirect '/spaces'
-  end
-
 end

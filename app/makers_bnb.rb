@@ -11,6 +11,7 @@ require 'json'
 require_relative 'helpers'
 
 require_relative 'server'
+require_relative 'controllers/login'
 require_relative 'controllers/users'
 require_relative 'controllers/requests'
 require_relative 'controllers/spaces'
