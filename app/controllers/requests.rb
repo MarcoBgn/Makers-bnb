@@ -73,7 +73,7 @@ class MakersBnb < Sinatra::Base
     @available_dates_array = AvailableDate.all(space_id: params[:space_requested])
     @available_dates_array.each do |aval_date|
       if aval_date.available_date == date
-       p aval_date.destroy
+        aval_date.destroy
       end
     end
 
