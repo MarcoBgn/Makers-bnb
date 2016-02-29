@@ -1,13 +1,46 @@
-<h1>Feel at Home, Anywhere</h1>
+<h1 class="center title">Sign up to <span class="logo">Space<span></h1>
 <section id='main_signup'>
-  <form id='sign_up' action='/users/new' method='post'>
-    <fieldset>
-     <p class='in_main'> Email:    <input type='email' name='email' value="<%= @user.email %>" required ></p></br>
-     <p class='in_main'> Password: <input type='password' name='password' required ></p></br>
-     <p class='in_main'> Password Confirmation: <input type='password' name='password_confirmation' required ></p></br>
-     <p class='in_main'> Name: <input type='text' name='name' value="<%= @user.name %>" required ></p></br>
-     <p class='in_main'> Username: <input type='text' name='username' value="<%= @user.username %>" required ></p></br>
-      <input class='in_main' type='submit' value='Create Account'>
-    </fieldset>
-  </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form id='sign_up' action='/users/new' method='post' class="form-horizontal" role="form">
+          <fieldset>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="email">Email:</label>
+              <div class="col-sm-9">
+                <input type='email' name='email' value="<%= @user.email %>" class="form-control" required >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="password">Password:</label>
+              <div class="col-sm-9">
+                <input type='password' name='password' class="form-control" required >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="password_confirmation">Password Confirmation:</label>
+              <div class="col-sm-9">
+                <input type='password' name='password_confirmation' class="form-control" required >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="name">Name:</label>
+              <div class="col-sm-9">
+                <input type='text' name='name' value="<%= @user.name %>" class="form-control" required >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="username">Username:</label>
+              <div class="col-sm-9">
+                <input type='text' name='username' value="<%= @user.username %>" class="form-control" required >
+              </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-3">
+              <input class='in_main btn' type='submit' value='Create Account'>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

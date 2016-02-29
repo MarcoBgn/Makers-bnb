@@ -1,21 +1,35 @@
 <section id='main'>
-  <form action='/edit' method='post'>
-    <input type='hidden' name='space_id' value='<%= @space.id%>'>
-     <fieldset>
-    <label for='name'>
-      <p class='in_main'>  Name:
-        <input type='text' name='name' value='<%= @space.name %>'></p></br>
-    </label>
-    <label for='description'>
-      <p class='in_main'> Description:
-       <textarea name='description'><%= @space.description%></textarea></p></br>
-    </label>
-    <label for='price'>
-     <p class='in_main'> Price per night: £
-     <input type='text' name='price' value='<%= @space.price%>'> </p></br>
-    </label>
-
-    <button type='submit' class="btn">Update Space</button>
-     </fieldset>
-  </form>
+  <h1 class="center title">Update '<%= @space.name %>'</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2">
+        <form action='/edit' method='post' class="form-horizontal">
+          <input type='hidden' name='space_id' value='<%= @space.id%>' role='form'>
+          <fieldset>
+            <div class="form-group">
+              <label class="control-label col-sm-3"  for='name'>Name:</label>
+              <div class="col-sm-9">
+                <input type='text' name='name' value='<%= @space.name %>' class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3"  for='description'>Description:</label>
+              <div class="col-sm-9">
+               <textarea name='description' class="form-control"><%= @space.description%></textarea>
+             </div>
+           </div>
+           <div class="form-group">
+            <label class="control-label col-sm-3"  for='price'>Price per night: £</label>
+            <div class="col-sm-9">
+             <input type='text' name='price' value='<%= @space.price%>' class="form-control">
+           </div>
+         </div>
+         <div class="col-sm-6 col-sm-offset-3">
+           <button type='submit' class="btn">Update Space</button>
+         </div>
+       </fieldset>
+     </form>
+   </div>
+ </div>
+</div>
 </section>

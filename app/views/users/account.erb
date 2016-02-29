@@ -1,16 +1,15 @@
-<h3>Your spaces</h3>
-<br>
-<p>Click a space to edit it:</p>
+<h1 class="center title">Your Spaces</h3>
+<p class="center">Click a space to edit it:</p>
 <% if @users_spaces.empty? %>
-<p>You currently have no spaces listed</p>
+<p class="center">You currently have no spaces listed</p>
 <% else %>
 <section class="container" id='spaces'>
   <ul class="row">
     <% @users_spaces.each do |space| %>
       <li class="list col-lg-12">
         <a id="space" href="/edit/<%=space.id%>"><section id="space">
-          <p id='title'><%=space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
-          <p id='desc'><%=space.description%></p>
+          <p class="name"><%=space.name%> - <span class='price'>£<%= space.price %> per night</span></p></br>
+          <p class='desc'><%=space.description%></p>
           <p>date from:<%=space.available_from%></p>
           <p>date to:<%=space.available_to%></p>
         </section></a>

@@ -1,22 +1,17 @@
+<h1 class="center title">Book a <span class="logo">Space</span></h1>
 
-<h1 class="center title">Book a Space</h1>
-
-<div class="center">
-<form action='/spaces' method='post' class="form-inline" role="form">
-  <div class="form-group">
-    <label for='available_from'>
-      Available from (DD/MM/YY)
-      <input type='text' name='available_from' class="form-control" id='date_picker_from'>
-    </label>
-  </div>
-  <div class="form-group">
-    <label for='available_to'>
-      Available to (DD/MM/YY)
-      <input type='text' name='available_to' class="form-control" id='date_picker_to'>
-    </label>
-  </div>
-  <button type='submit' class="btn">List Spaces</button>
-</form>
+<div class="container center">
+  <form action='/spaces' method='post' class="form-inline" role="form">
+    <div class="form-group">
+      <label for='available_from'>Available from</label>
+        <input type='text' name='available_from' class="form-control" id='date_picker_from' placeholder="DD/MM/YY">
+    </div>
+    <div class="form-group">
+      <label for='available_to'>Available to</label>
+        <input type='text' name='available_to' class="form-control" id='date_picker_to' placeholder="DD/MM/YY">
+    </div>
+    <button type='submit' class="btn">List Spaces</button>
+  </form>
 </div>
 
 <section class="container" id='spaces'>
@@ -24,8 +19,8 @@
     <% @spaces.each do |space| %>
     <li class="list col-lg-12">
       <a id="space" href="/requests/book/<%= space.id %>"><section id="space">
-        <p id='title'><%= space.id %> <%= space.name%> - <span id='price'>£<%= space.price %> per night</span></p></br>
-        <p id='desc'><%= space.description%></p>
+        <p class='name'><%= space.id %> <%= space.name%> - <span class='price'>£<%= space.price %> per night</span></p></br>
+        <p class='desc'><%= space.description%></p>
         <p>date from:<%= space.available_from%></p>
         <p>date to:<%= space.available_to%></p>
         <form id='space_form' action='/sessions' method='post'>
