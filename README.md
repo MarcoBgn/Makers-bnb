@@ -10,6 +10,38 @@ Authors
 
 * Yan-Yi Li, Matt Drake, Mark Hill and Marco Bagnasco @ Makers Academy (Ronin) - Week 6
 
+Main Page
+---------
+
+![Space](/app/public/images/ScreenShot1.png?raw=true "Screen Shot 1")
+
+Instructions
+------------
+
+* Visit:
+
+```
+http://mmmy-bnb.herokuapp.com/spaces
+
+```
+or
+
+```
+$ git clone https://github.com/MarcoCode/Makers-bnb.git
+
+                      or
+                      
+$ git clone git@github.com:MarcoCode/Makers-bnb.git
+
+$ cd makers-bnb
+$ rackup
+
+In your browser visit http://localhost:9292
+```
+
+Specifications
+--------------
+
 ```
 Headline specifications
 ● Any signed-up user can list a new space.
